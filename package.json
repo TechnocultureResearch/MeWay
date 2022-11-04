@@ -1,5 +1,5 @@
 {
-  "name": "no",
+  "name": "myapp",
   "version": "0.0.0",
   "private": true,
   "workspaces": [
@@ -10,16 +10,23 @@
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "installhooks": "install husky"
   },
   "devDependencies": {
     "eslint-config-custom": "workspace:*",
     "prettier": "latest",
-    "turbo": "latest"
+    "turbo": "latest",
+    "husky": "^8.0.1"
   },
   "engines": {
     "node": ">=14.0.0"
   },
   "dependencies": {},
-  "packageManager": "pnpm@7.13.5"
+  "packageManager": "pnpm@7.13.5",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
 }
