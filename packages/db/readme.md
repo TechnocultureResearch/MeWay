@@ -1,1 +1,1 @@
-inside this file all the databases stuff will be going
+# Add database related data here
