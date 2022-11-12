@@ -1,0 +1,1 @@
+module.exports = require("@meway/config/tailwind.config.js");
