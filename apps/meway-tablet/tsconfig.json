@@ -3,5 +3,6 @@
   "compilerOptions": {
     "strict": true
   },
+  "check": "tsc --noEmit --jsx react",
   "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.cjs", "**/*.mjs"]
 }

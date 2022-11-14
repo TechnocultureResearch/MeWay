@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-namespace */
 /**
  * Learn more about using TypeScript with React Navigation:
  * https://reactnavigation.org/docs/typescript/
@@ -12,6 +13,7 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 declare global {
   namespace ReactNavigation {
+    // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface RootParamList extends RootStackParamList {}
   }
 }

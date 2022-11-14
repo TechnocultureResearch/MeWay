@@ -1,1 +1,1 @@
-module.exports = require("@meway/config/tailwind.config.js");
+module.exports = require("../web/tailwind.config");
