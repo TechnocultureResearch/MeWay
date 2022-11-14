@@ -111,3 +111,9 @@ dist
 yarn.lock
 
 **/.env
+
+# Virtual Environments
+venv/
+env/
+virtualenv/
+virtual/
