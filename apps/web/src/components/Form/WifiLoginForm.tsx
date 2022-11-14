@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 
 
+
 const WifiLoginForm = () => {
+
   const [value, setValue] = useState<number>(0);
   const [destination, setDestination] = useState("");
   const [ageArray] = useState(new Array(100).fill(0));
@@ -58,10 +60,7 @@ const WifiLoginForm = () => {
               ${!selectedAge && "font-[#D9D9D9] "}`}
               >
                 {selectedAge ? (
-                 <div className="ml-2">
-                    {selectedAge}
-                  </div>
-                 
+                  <div className="ml-2">{selectedAge}</div>
                 ) : (
                   <div className="flex justify-center ml-2">
                     <a href="https://www.dictionary.com/e/wp-content/uploads/2018/03/Thinking_Face_Emoji-Emoji-Island.png"></a>
@@ -93,7 +92,7 @@ const WifiLoginForm = () => {
               </div>
 
               <ul
-                className={`bg-white text-black w-32 mt-2 overflow-y-auto fixed z-30  ${
+                className={`bg-white text-black w-32 overflow-y-auto fixed z-30  ${
                   open ? "max-h-60" : "max-h-0"
                 }`}
               >
@@ -159,25 +158,24 @@ const WifiLoginForm = () => {
               onChange={inputHandler}
               autoComplete="off"
               className="px-2 w-32 h-11 font-inter font-medium box-border
-               bg-[#212121] rounded-lg flex justify-end  border-solid border border-[#FFFFFF] 
+               bg-[#212121] rounded-lg flex justify-end text-sm border-solid border border-[#FFFFFF] 
                font-[#D9D9D9]"
             />
           </div>
         </div>
       </div>
-
       <div
-        className="flex items-center
-      font-inter font-thin text-base non-italic
-      leading-5 order-none
-      grow-0 font-[#FFFFFF] flex-none flex mt-24"
-      >
-        {selectedAge && destination && selectedGender ? (
-          <div className="w-full max-w-4xl flex justify-end ">
-            <button className="absolute bottom-0 right-10 h-16 w-16">
-              Connect
-            </button>
+        className="flex w-72 max-w-4xl h-11
+        font-inter font-thin text-base non-italic
+        leading-5 order-none justify-between
+        grow-0 font-[#FFFFFF] flex-none mt-20 mb-2.5"
+        >
+        {selectedAge && destination && selectedGender ? 
+         (
+          <div className="flex justify-end items-end ml-auto">
+          <p className="">Connect</p>
           </div>
+        
         ) : (
           <p>Fill in the details to connect to the internet.</p>
         )}
