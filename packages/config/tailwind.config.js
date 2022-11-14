@@ -14,6 +14,9 @@ module.exports = {
         { fontFeatureSettings: '"cv11", "ss01"' },
       ],
     },
+    fontWeight:{
+      thin: "100",
+    }
   },
   plugins: [],
 };
