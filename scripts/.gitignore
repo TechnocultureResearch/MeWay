@@ -2,7 +2,6 @@
 references.txt
 
 # Videoslist
-Videos-list.csv
 *.csv
 
 # Byte-compiled / optimized / DLL files
