@@ -4,8 +4,6 @@ module.exports = {
       "es2021": true
   },
   extends: [
-      "expo",
-      "react-native",
       "next",
       "turbo",
       "prettier",

@@ -89,7 +89,7 @@ export const HomeScreen = () => {
           data={postQuery.data}
           estimatedItemSize={20}
           ItemSeparatorComponent={() => <View className="h-2" />}
-          renderItem={(p: { item: { id: any; }; }) => (
+          renderItem={(p: { item: { id: any } }) => (
             <TouchableOpacity onPress={() => setShowPost(p.item.id)}>
               <PostCard post={p.item} />
             </TouchableOpacity>
