@@ -3,6 +3,7 @@
     "name": "expo",
     "slug": "expo",
     "version": "1.0.0",
+    "owner":"technoculture",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -11,6 +12,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "platforms": [
+      "android"
+    ],
     "updates": {
       "fallbackToCacheTimeout": 0
     },
@@ -29,5 +33,6 @@
     "web": {
       "favicon": "./assets/favicon.png"
     }
-  }
+  },
+  "private":true
 }

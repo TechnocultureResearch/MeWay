@@ -1,5 +1,5 @@
 import { registerRootComponent } from "expo";
-
+//No matching version found for eslint-config-custom@* inside the workspace
 import { App } from "./src/_app";
 
 // registerRootComponent calls AppRegistry.registerComponent('main', () => App);

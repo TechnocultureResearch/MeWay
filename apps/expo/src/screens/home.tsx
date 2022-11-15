@@ -10,7 +10,7 @@ import {
 
 import { FlashList } from "@shopify/flash-list";
 import type { inferProcedureOutput } from "@trpc/server";
-import type { AppRouter } from "@acme/api";
+import type { AppRouter } from "@meway/api";
 
 import { trpc } from "../utils/trpc";
 
@@ -89,7 +89,7 @@ export const HomeScreen = () => {
           data={postQuery.data}
           estimatedItemSize={20}
           ItemSeparatorComponent={() => <View className="h-2" />}
-          renderItem={(p) => (
+          renderItem={(p: { item: { id: any; }; }) => (
             <TouchableOpacity onPress={() => setShowPost(p.item.id)}>
               <PostCard post={p.item} />
             </TouchableOpacity>

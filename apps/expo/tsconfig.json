@@ -4,5 +4,6 @@
     "jsx": "react",
     "strict": true
   },
-  "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.mjs"]
+  "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.mjs"],
+  "exclude": ["node_modules"]
 }
