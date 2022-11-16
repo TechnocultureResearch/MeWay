@@ -1,53 +1,47 @@
 from pytube import YouTube 
 from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
 import csv
-# from threading import Thread
+from threading import Thread
 import re
 import os
 import argparse
 import sys
 import boto3
 from botocore.exceptions import ClientError
+import tempfile
+from typing import List
 from dotenv import load_dotenv
 
 
 load_dotenv()
 
 
-parser = argparse.ArgumentParser(description='Download Youtube video, extract into subclips and upload to S3')
-parser.add_argument('video_list', help='Video list location')
-parser.add_argument('download_path', help='Location for downloaded YouTube videos')
-parser.add_argument('extracted_ads_path', help='Location for extracted YouTube subclips')
-parser.add_argument('s3_bucket_name', help='Name of the AWS S3 Bucket where downloaded Ads will be uploaded.')
-parsed_args = parser.parse_args(sys.argv[1:])
+download_threads = []
+upload_threads = []
 
-
-VIDEO_LIST = fr"{parsed_args.video_list}"
-DOWNLOAD_PATH = fr"{parsed_args.download_path}"
-EXTRACTED_ADS_PATH = fr"{parsed_args.extracted_ads_path}"
-S3_BUCKET_NAME = fr"{parsed_args.s3_bucket_name}"
-
-
-
-def download_yt_video(video_url, timestamps):
+def download_and_extract_yt_video(video_url: str, timestamps: List[str]) -> None:
     """Download Youtube Videos and Extract into subclips
 
     Args:
         video_url (str): The URL of the Youtube Video
         timestamps (list[str]): List of timestamps used to extract the video into subclips
     """
-    yt = YouTube(video_url)
-    yt.streams.filter(file_extension='mp4')
-    vid = yt.streams.get_by_itag(22)
-    vid_title = vid.title
-    print(f"Started downloading video: {vid_title}")
-    downloaded_video_path = vid.download(DOWNLOAD_PATH)
-    print(f"Successfully downloaded video: {vid_title}\nDownload path: {downloaded_video_path}")
-    print(f"Extracting subclips of the video: {vid_title}")
-    for timestamp in timestamps:
-        extract_subclip(downloaded_video_path, timestamp)
+    try:
+        yt = YouTube(video_url)
+        yt.streams.filter(file_extension='mp4')
+        vid = yt.streams.get_by_itag(22)
+        vid_title = vid.title
+        print(f"Started downloading video: {vid_title}")
+        downloaded_video_path = vid.download(DOWNLOAD_PATH)
+        print(f"Successfully downloaded video: {vid_title}\nDownload path: {downloaded_video_path}")
+        print(f"Extracting subclips of the video: {vid_title}")
+        for timestamp in timestamps:
+            extract_subclip(downloaded_video_path, timestamp)
+    except Exception as e:
+        print(e)
+        return
 
-def extract_subclip(file_location, timestamp):
+def extract_subclip(file_location: str, timestamp: str) -> None:
     """Extract videos into subclips
 
     Args:
@@ -65,46 +59,80 @@ def extract_subclip(file_location, timestamp):
     ffmpeg_extract_subclip(file_location, starttime, endtime, targetname=targetname)
     print(f"Extracted: {target_filename}")
 
-AWS_ACCESS_KEY = os.environ.get('AWS_ACCESS_KEY')
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 
-s3_client = boto3.client(
-    's3',
-    aws_access_key_id=AWS_ACCESS_KEY,
-    aws_secret_access_key=AWS_SECRET_ACCESS_KEY
-)
-def upload_to_s3(file_location, target_filename):
+def upload_to_s3(s3_client, full_file_path: str, bucket_name: str, key: str) -> None:
     """Upload the video to S3
 
     Args:
-        file_location (str): Location of the Video that needs to be uploaded to S3.
-        target_filename (str): Name of the uploaded file in S3
-
-    Returns:
-        bool: returns True if the video is successfully uploaded else, returns False
+        s3_client (s2.client): Boto3 S3 client
+        full_file_path (str): Location of the Video that needs to be uploaded to S3.
+        bucket_name (str): Name of the S3 bucket
+        key (str): Name of the uploaded file in S3
     """
+    def check(s3_client, bucket_name: str, key: str):
+        try:
+            s3_client.head_object(Bucket=bucket_name, Key=key)
+        except ClientError as e:
+            return int(e.response['Error']['Code']) != 404
+        return True
+
     try:
-        s3_client.upload_file(file_location, S3_BUCKET_NAME, target_filename)
+        print(f"Checking if the file {key} already exists in s3.")
+        exists = check(s3_client, bucket_name, key)
+        if not exists:
+            print(f"Uploading {key} to S3")
+            s3_client.upload_file(full_file_path, bucket_name, key)
+            print(f"Successfully uploaded {key} to s3")
     except ClientError as e:
         print(e)
-        return False
+        return
     except Exception as e:
         print(e)
-        return False
-    return True
+        return
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='Download Youtube video, extract into subclips and upload to S3')
+    parser.add_argument('video_list', help='Video list location')
+    parser.add_argument('s3_bucket_name', help='Name of the AWS S3 Bucket where downloaded Ads will be uploaded.')
+    parsed_args = parser.parse_args(sys.argv[1:])
 
 
-with open(VIDEO_LIST, mode ='r')as file:
-    csvFile = csv.reader(file)
-    for lines in csvFile:
-        yt_url = lines[0]
-        timestamps = lines[1].split(';')
-        download_yt_video(yt_url, timestamps)
+    VIDEO_LIST = fr"{parsed_args.video_list}"
+    S3_BUCKET_NAME = fr"{parsed_args.s3_bucket_name}"
 
+    download_folder = "YTVids"
+    if not os.path.exists(download_folder):
+        os.mkdir(download_folder)
+    temp_extract_ads_directory = tempfile.TemporaryDirectory(suffix=None, prefix="YTAds", dir='.')
+    DOWNLOAD_PATH = download_folder
+    EXTRACTED_ADS_PATH = temp_extract_ads_directory.name
 
-yt_ads = os.listdir(EXTRACTED_ADS_PATH)
-for video in yt_ads:
-    print(f"Uploading {video} to S3")
-    full_file_path = os.path.join(EXTRACTED_ADS_PATH, video)
-    s3_client.upload_file(full_file_path, S3_BUCKET_NAME, video)
-    print(f"Uploaded {video} to S3")
+    AWS_ACCESS_KEY = os.environ.get('AWS_ACCESS_KEY')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+    s3_client = boto3.client(
+        's3',
+        aws_access_key_id=AWS_ACCESS_KEY,
+        aws_secret_access_key=AWS_SECRET_ACCESS_KEY
+    )
+
+    with open(VIDEO_LIST, mode ='r')as file:
+        csvFile = csv.reader(file)
+        for row in csvFile:
+            yt_url = row[0]
+            timestamps = row[1].split(';')
+            process = Thread(target=download_and_extract_yt_video, args=[yt_url, timestamps])
+            process.start()
+            download_threads.append(process)
+
+    for process in download_threads:
+        process.join()
+
+    yt_ads = os.listdir(EXTRACTED_ADS_PATH)
+    for ad in yt_ads:
+        full_file_path = os.path.join(EXTRACTED_ADS_PATH, ad)
+        process = Thread(target=upload_to_s3, args=[s3_client, full_file_path, S3_BUCKET_NAME, ad])
+        process.start()
+        upload_threads.append(process)
+
+    for process in upload_threads:
+        process.join()

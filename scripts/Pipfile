@@ -26,6 +26,7 @@ s3transfer = "==0.6.0"
 six = "==1.16.0"
 tqdm = "==4.64.1"
 urllib3 = "==1.26.12"
+syncs3 = "*"
 
 [dev-packages]
 
