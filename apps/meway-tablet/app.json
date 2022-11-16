@@ -3,7 +3,7 @@
     "name": "expo",
     "slug": "expo",
     "version": "1.0.0",
-    "owner":"technoculture",
+    "owner": "technoculture",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -32,7 +32,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "7fb930b9-e9bb-4fb6-9f03-3d9f2f3228c1"
+      }
     }
   },
-  "private":true
+  "private": true
 }
