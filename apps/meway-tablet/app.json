@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "expo",
-    "slug": "expo",
+    "name": "meway-tablet",
+    "slug": "meway",
     "version": "1.0.0",
     "owner": "technoculture",
     "orientation": "portrait",
@@ -28,14 +28,15 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.technoculture.meway"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "7fb930b9-e9bb-4fb6-9f03-3d9f2f3228c1"
+        "projectId": "4e25e43f-a276-43c2-aa24-feafb645c1fc"
       }
     }
   },

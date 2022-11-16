@@ -1,5 +1,5 @@
 packages:
-  - apps/expo
+  - apps/meway-tablet
   - apps/web
   - packages/api
   - packages/auth
