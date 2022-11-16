@@ -3,12 +3,6 @@ jobs:
   publish:
     runs-on: ubuntu-latest
 
-    strategy:
-      fail-fast: false
-      ubuntu:
-        pnpm:
-          - 7.13.5
-
     steps:
       - name: Checkout
         uses: actions/checkout@v3
