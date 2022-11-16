@@ -14,6 +14,9 @@
         "installhooks": "husky install",
         "test": "echo 'no tests added yet'"
     },
+    "dependencies": {
+        "react-native": "0.69.6"
+    },
     "devDependencies": {
         "@commitlint/cli": "^17.0.3",
         "@commitlint/config-conventional": "^17.0.3",
