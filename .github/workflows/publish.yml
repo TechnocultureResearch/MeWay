@@ -6,6 +6,10 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
+      - name: 🏗 Setup Node
+        uses: actions/setup-pnpm@v7
+        with:
+          pnpm-version: 7.x
       - name: 🏗 Setup repo
         uses: actions/checkout@v2
 

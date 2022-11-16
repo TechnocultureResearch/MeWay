@@ -6,7 +6,8 @@
     "start": "expo start",
     "dev": "expo start --android",
     "clean": "rm -rf .expo .turbo node_modules",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "postinstall": "cd ../.. && pnpm build"
   },
   "dependencies": {
     "@meway/api": "*",
