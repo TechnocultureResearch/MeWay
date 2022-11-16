@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "isolatedModules": true
   },
   "extends": "../../tsconfig.json",
   "include": [

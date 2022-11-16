@@ -1,18 +1,29 @@
 {
   "cli": {
-    "version": ">= 2.7.0"
+    "promptToConfigurePushNotifications": false
   },
   "build": {
+    "monorepo": {
+      "cache": {
+        "key": "turbo",
+        "customPaths": [
+          "../../node_modules/.cache/turbo"
+        ]
+      }
+    },
     "development": {
-      "developmentClient": true,
-      "distribution": "internal"
+      "extends": "monorepo",
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      }
     },
-    "preview": {
-      "distribution": "internal"
-    },
-    "production": {}
-  },
-  "submit": {
-    "production": {}
+    "production": {
+      "extends": "monorepo",
+      "distribution": "store",
+      "android": {
+        "buildType": "app-bundle"
+      }
+    }
   }
 }
