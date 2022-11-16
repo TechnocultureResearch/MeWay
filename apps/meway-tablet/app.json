@@ -1,9 +1,9 @@
 {
   "expo": {
-    "name": "meway-tablet",
-    "slug": "meway",
-    "version": "1.0.0",
     "owner": "technoculture",
+    "slug": "meway",
+    "name": "meway-tablet",
+    "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
