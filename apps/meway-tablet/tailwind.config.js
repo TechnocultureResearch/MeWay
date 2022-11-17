@@ -1,1 +1,1 @@
-module.exports = require("@meway/tailwind-config");
+module.exports=require("@meway/tailwind-config");
