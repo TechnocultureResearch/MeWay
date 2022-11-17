@@ -7,7 +7,7 @@
     "dev": "expo start --android",
     "clean": "rm -rf .expo .turbo node_modules",
     "web": "expo start --web",
-    "postinstall": "cd ../.. && pnpm build"  
+    "postinstall": "cd ../.. && pnpm build && pnpm install --no-prefer-frozen-lockfile"  
   },
   "dependencies": {
     "@meway/api": "*",
