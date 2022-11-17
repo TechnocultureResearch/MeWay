@@ -43,7 +43,6 @@ importers:
       '@types/react-native': ~0.70.6
       babel-preset-expo: ^9.2.2
       eslint: 7.32.0
-      eslint-config-custom: workspace:*
       expo: ~46.0.16
       expo-status-bar: ~1.4.0
       expo-updates: ^0.15.5
@@ -86,7 +85,6 @@ importers:
       '@types/react': 18.0.25
       '@types/react-native': 0.70.6
       eslint: 7.32.0
-      eslint-config-custom: link:../../packages/eslint-config-custom
       postcss: 8.4.18
       tailwindcss: 3.2.1_postcss@8.4.18
       typescript: 4.8.4
