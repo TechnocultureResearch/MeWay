@@ -1,9 +1,9 @@
-import WifiLoginForm from "../src/components/Form/WifiLoginForm";
+import LoginForm from "../src/components/Form/LoginForm";
 
 export default function Web(): JSX.Element {
   return (
     <div>
-      <WifiLoginForm />
+      <LoginForm />
     </div>
   );
 }

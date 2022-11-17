@@ -16,6 +16,10 @@ module.exports = {
     },
     fontWeight:{
       thin: "100",
+    },
+    screens:{
+      'sm':  {'min': '300px'},
+          
     }
   },
   plugins: [],
