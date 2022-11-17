@@ -5,7 +5,7 @@ export const authRouter = router({
     return ctx.session;
   }),
   getSecretMessage: protectedProcedure.query(({ ctx }) => {
-    // testing type validation of overridden next-auth Session in @acme/auth package
+    // testing type validation of overridden next-auth Session in @meway/auth package
     return `
         Hello ${ctx.session.user.id}
         You are logged in and can see this secret message!
