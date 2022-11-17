@@ -17,20 +17,20 @@ export const HomeScreen = () => {
     <SafeAreaView>
       <View className="h-full w-full p-4">
         <Text className="text-5xl font-bold mx-auto pb-2">
-          Create <Text className="text-indigo-500">T3</Text> Turbo
+          Create <Text className="text-indigo-500">MEWAY</Text> tablet
         </Text>
 
         <View className="py-2">
           {showPost ? (
             <Text>
-              <Text className="font-semibold">Selected post:</Text>
+              <Text className="font-semibold"></Text>
               {showPost}
             </Text>
           ) : (
-            <Text className="italic font-semibold">Press on a post</Text>
+            <Text className="italic font-semibold">Meway-Button</Text>
           )}
         </View>
       </View>
     </SafeAreaView>
-
-)};
+  );
+};

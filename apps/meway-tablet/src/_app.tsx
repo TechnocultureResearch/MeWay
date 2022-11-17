@@ -6,9 +6,9 @@ import { HomeScreen } from "./screens/home";
 
 export const App = () => {
   return (
-      <SafeAreaProvider>
-        <HomeScreen />
-        <StatusBar />
-      </SafeAreaProvider>
+    <SafeAreaProvider>
+      <HomeScreen />
+      <StatusBar />
+    </SafeAreaProvider>
   );
 };
