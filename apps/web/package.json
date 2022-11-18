@@ -9,13 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@meway/api": "*",
-    "@meway/tailwind-config": "*",
+    "@meway/api": "file:../../packages/api",
+    "@meway/tailwind-config": "file:../../packages/config/tailwind",
     "next": "13.0.0",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "react": "18.0.0",
+    "react-dom": "18.0.0",
     "eslint-config-custom": "*",
-    "react-native": "0.70.6"
+    "react-native": "0.69.6"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",

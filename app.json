@@ -15,9 +15,6 @@
       "assetBundlePatterns": [
         "**/*"
       ],
-      "ios": {
-        "supportsTablet": true
-      },
       "android": {
         "package": "com.technoculture.meway"
       },

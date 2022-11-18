@@ -1,4 +1,5 @@
 import { registerRootComponent } from "expo";
+import "react-native-get-random-values";
 //No matching version found for eslint-config-custom@* inside the workspace
 import { App } from "./src/_app";
 
