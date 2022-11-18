@@ -111,3 +111,7 @@ dist
 yarn.lock
 
 **/.env
+
+# Ignore the .expo file
+.expo
+**/.expo
