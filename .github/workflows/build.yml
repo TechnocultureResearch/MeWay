@@ -1,0 +1,37 @@
+name: build
+
+on:
+  workflow_dispatch:
+    inputs:
+      platform:
+        description: Platform to build for (all/android/ios)
+        type: choice
+        required: true
+        default: all
+        options:
+          - android
+      profile:
+        description: EAS build profile (development/production)
+        type: choice
+        required: true
+        default: development
+        options:
+          - development
+          - production
+
+jobs:
+  mobile:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🏗 Setup repository
+        uses: actions/checkout@v3
+
+      - name: 🏗 Setup monorepo
+        uses: ./.github/actions/setup-monorepo
+        with:
+          expo-token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: 👷 Build packages for mobile
+
+      - name: 🚀 Build mobile
+        working-directory: apps/meway-tablet

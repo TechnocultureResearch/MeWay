@@ -7,7 +7,7 @@
       "cache": {
         "key": "turbo",
         "customPaths": [
-          "../../node_modules/.cache/turbo"
+          "/node_modules/.cache/turbo"
         ]
       }
     },
