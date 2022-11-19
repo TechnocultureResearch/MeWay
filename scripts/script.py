@@ -13,6 +13,7 @@ from typing import List
 from pydantic import BaseModel
 from urllib.parse import urlparse
 
+
 from dotenv import load_dotenv
 
 
@@ -173,6 +174,8 @@ if __name__ == "__main__":
     VIDEO_LIST = fr"{parsed_args.video_list}"
     S3_BUCKET_NAME = fr"{parsed_args.s3_bucket_name}"
 
+    if not os.path.isfile(VIDEO_LIST):
+        raise Exception("The given file is does not exists. Enter a valid file name with a valid file path.")
 
     download_folder = "YTVids"
     if not os.path.exists(download_folder):
@@ -204,9 +207,6 @@ if __name__ == "__main__":
     )
 
     yt_ads = os.listdir(EXTRACTED_ADS_PATH)
-    print("=============================")
-    print(len(yt_ads))
-    print("=============================")
     for ad in yt_ads:
         full_file_path = os.path.join(EXTRACTED_ADS_PATH, ad)
         process = Thread(target=upload_to_s3, args=[s3_client, full_file_path, S3_BUCKET_NAME, ad])
