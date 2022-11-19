@@ -9,7 +9,6 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "@meway/api": "file:../../packages/api",
     "@meway/tailwind-config": "file:../../packages/config/tailwind",
     "@react-native-community/cli-server-api": "^9.2.1",
     "@shopify/flash-list": "1.1.0",

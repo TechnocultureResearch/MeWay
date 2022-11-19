@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@meway/api": "file:../../packages/api",
     "@meway/tailwind-config": "file:../../packages/config/tailwind",
     "next": "13.0.0",
     "react": "18.0.0",

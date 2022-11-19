@@ -1,8 +1,5 @@
 packages:
   - apps/meway-tablet
   - apps/web
-  - packages/api
-  - packages/auth
-  - packages/db
   - packages/config/*
   - packages/eslint-config-custom
