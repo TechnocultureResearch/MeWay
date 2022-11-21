@@ -10,6 +10,7 @@ import boto3
 from botocore.exceptions import ClientError
 import tempfile
 from typing import List
+import ntpath
 from pydantic import BaseModel
 from pytube.cli import on_progress
 from urllib.parse import urlparse
@@ -123,10 +124,10 @@ def extract_subclip(file_location: str, timestamp: TimeStamp) -> None:
     """
     starttime = (timestamp.start_min * 60) + timestamp.start_sec
     endtime = (timestamp.end_min * 60) + timestamp.end_sec
-    _, tail = os.path.split(file_location)
-    filename = tail[0:-5]
+    filename, _ = os.path.splitext(ntpath.basename(file_location))
     target_filename = f'{filename}_{timestamp.start_min}_{timestamp.start_sec}_{timestamp.end_min}_{timestamp.end_sec}.mp4'
     targetname = os.path.join(EXTRACTED_ADS_PATH, target_filename)
+
     print(f"Extracting: {target_filename}")
     ffmpeg_extract_subclip(file_location, starttime, endtime, targetname=targetname)
     print(f"Extracted: {target_filename}")
@@ -170,7 +171,7 @@ if __name__ == "__main__":
     S3_BUCKET_NAME = fr"{parsed_args.s3_bucket_name}"
 
     if not os.path.isfile(VIDEO_LIST):
-        raise Exception("The given file is does not exists. Enter a valid file name with a valid file path.")
+        raise FileNotFoundError("The given file does not exists. Enter a valid file name with a valid file path.")
 
     download_folder = "YTVids"
     if not os.path.exists(download_folder):
