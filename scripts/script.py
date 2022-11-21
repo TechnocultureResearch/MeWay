@@ -11,6 +11,7 @@ from botocore.exceptions import ClientError
 import tempfile
 from typing import List
 from pydantic import BaseModel
+from pytube.cli import on_progress
 from urllib.parse import urlparse
 
 
@@ -102,8 +103,8 @@ def download_and_extract_yt_video(vd: VideoDetail) -> None:
     Args:
         vd (VideoDetail): VideoDetail object that contains url and List[TimeStamp] attributes
     """
-    yt = YouTube(vd.url)
-    yt.streams.filter(file_extension='mp4')
+    yt = YouTube(vd.url, on_progress_callback=on_progress)
+    yt.streams.filter(progressive=True, file_extension='mp4')
     vid = yt.streams.get_by_itag(22)
     vid_title = vid.title
     print(f"Started downloading video: {vid_title}")
