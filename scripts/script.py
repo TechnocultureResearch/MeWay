@@ -23,6 +23,10 @@ load_dotenv()
 download_threads = []
 upload_threads = []
 
+class InvalidURL(Exception):
+    """Raise Exception when the URL is invalid"""
+    pass
+
 class TimeStamp(BaseModel):
     start_min: int
     start_sec: int
@@ -57,7 +61,7 @@ class YTExtractor():
             csvList = list(enumerate(csvFile))
             length = len(csvList)
             if not length:
-                raise Exception(f"The csv file {self.video_list} is empty!")
+                raise ValueError(f"The csv file {self.video_list} is empty!")
             for index, row in csvList:
                 row_index = index +1
                 row_length = len(row)
@@ -65,22 +69,22 @@ class YTExtractor():
                         print(f"The line {row_index} is empty!!!")
                         continue
                 elif row_length != 2:
-                    raise Exception(f"The row {row_index} of the csv file contains {row_length} columns.\nExpected: 2 columns")
+                    raise IndexError(f"The row {row_index} of the csv file contains {row_length} columns.\nExpected: 2 columns")
 
                 url = row[0]
                 if not self.url_check(url):
-                    raise Exception(f"The provided url in the line {row_index} is INVALID.\n URL: {url}")
+                    raise InvalidURL(f"The provided url in the line {row_index} is INVALID.\n URL: {url}")
                 
                 separator = ';'
                 timestamps = row[1].split(separator)
                 if not timestamps:
-                    raise Exception(f"The timestamps in the row {row_index} is not properly separated by the separator: {separator}.\ntimestamps: {row[1]}")
+                    raise ValueError(f"The timestamps in the row {row_index} is not properly separated by the separator: {separator}.\ntimestamps: {row[1]}")
                 yt_timestamps = []
 
                 for timestamp in timestamps:
                     pattern = re.compile('\d{1,2}')
                     if not pattern.match(timestamp):
-                        raise Exception(f"The timestamp format is not correct in the row {row_index}.\ntimestamp: {timestamp}")
+                        raise ValueError(f"The timestamp format is not correct in the row {row_index}.\ntimestamp: {timestamp}")
                     start_min, start_sec, end_min, end_sec = map(int, re.split('[:-]', timestamp))
                     
                     ts = TimeStamp(start_min=start_min, start_sec=start_sec, end_min=end_min, end_sec=end_sec)
@@ -98,20 +102,16 @@ def download_and_extract_yt_video(vd: VideoDetail) -> None:
     Args:
         vd (VideoDetail): VideoDetail object that contains url and List[TimeStamp] attributes
     """
-    try:
-        yt = YouTube(vd.url)
-        yt.streams.filter(file_extension='mp4')
-        vid = yt.streams.get_by_itag(22)
-        vid_title = vid.title
-        print(f"Started downloading video: {vid_title}")
-        downloaded_video_path = vid.download(DOWNLOAD_PATH)
-        print(f"Successfully downloaded video: {vid_title}\nDownload path: {downloaded_video_path}")
-        print(f"Extracting subclips of the video: {vid_title}")
-        for timestamp in vd.timestamps:
-            extract_subclip(downloaded_video_path, timestamp)
-    except Exception as e:
-        print(e)
-        return
+    yt = YouTube(vd.url)
+    yt.streams.filter(file_extension='mp4')
+    vid = yt.streams.get_by_itag(22)
+    vid_title = vid.title
+    print(f"Started downloading video: {vid_title}")
+    downloaded_video_path = vid.download(DOWNLOAD_PATH)
+    print(f"Successfully downloaded video: {vid_title}\nDownload path: {downloaded_video_path}")
+    print(f"Extracting subclips of the video: {vid_title}")
+    for timestamp in vd.timestamps:
+        extract_subclip(downloaded_video_path, timestamp)
 
 def extract_subclip(file_location: str, timestamp: TimeStamp) -> None:
     """Extract videos into subclips
@@ -147,21 +147,15 @@ def upload_to_s3(s3_client, full_file_path: str, bucket_name: str, key: str) -> 
             return int(e.response['Error']['Code']) != 404
         return True
 
-    try:
-        print(f"Checking if the file {key} already exists in s3.")
-        exists = check(s3_client, bucket_name, key)
-        if not exists:
-            print(f"File: {key} does not exists in S3")
-            print(f"Started uploading {key} to S3")
-            s3_client.upload_file(full_file_path, bucket_name, key)
-            print(f"Successfully uploaded {key} to s3")
+    print(f"Checking if the file {key} already exists in s3.")
+    exists = check(s3_client, bucket_name, key)
+    if not exists:
+        print(f"File: {key} does not exists in S3")
+        print(f"Started uploading {key} to S3")
+        s3_client.upload_file(full_file_path, bucket_name, key)
+        print(f"Successfully uploaded {key} to s3")
+    else:
         print(f"File {key} already exists in S3. Cancelled uploading")
-    except ClientError as e:
-        print(e)
-        return
-    except Exception as e:
-        print(e)
-        return
 
 
 if __name__ == "__main__":
