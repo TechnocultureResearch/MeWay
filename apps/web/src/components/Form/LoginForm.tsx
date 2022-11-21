@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import Buttons from "./Buttons";
+
 
 const LoginForm = () => {
   const [value, setValue] = useState<number>(0);
-  const [destination, setDestination] = useState("");
+  const [destination, setDestination] = useState<string>("");
   const [ageArray] = useState(new Array(100).fill(0));
-  const [selectedGender, setSelectedGender] = useState("");
+  const [selectedGender, setSelectedGender] = useState<string>("");
   const [selectedAge, setSelectedAge] = useState<number>();
   const [open, setOpen] = useState<boolean>(false);
 
@@ -14,9 +16,10 @@ const LoginForm = () => {
     console.log(enteredName, value, selectedGender);
   };
 
+
   return (
     <>
-      <div className="bg-[#000000] sm:flex flex-col items-center p-0 pt-0 pr-0 pb-0 pl-0 h-screen relative">
+      <div className="bg-black sm:flex flex-col items-center p-0 pt-0 pr-0 pb-0 pl-0 h-screen relative">
         <div className="w-72 h-64 flex flex-col items-start p-0 gap-8  mx-8 mt-8">
           <div className="flex flex-row items-start w-72 h-28 p-0 gap-2.5">
             <div className="w-28 h-28 relative pt-4 pl-0 pb-4 pr-8">
@@ -38,7 +41,7 @@ const LoginForm = () => {
                 viewBox="0 0 81 82"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                className=" absolute left-0 right-1 top-0.5 mt-[17px] bottom-0.5"
+                className="absolute left-0 right-1 top-0.5 mt-[17px] bottom-0.5"
               >
                 <path
                   fillRule="evenodd"
@@ -49,13 +52,13 @@ const LoginForm = () => {
               </svg>
             </div>
           </div>
-          <div className="flex flex-row items-start w-72 p-0  h-[108px]">
-            <div className="w-64 h-28 text-[45px] non-italic leading-[54px] text-[#FFFFFF] font-[100] font-inter tracking-normal">
+          <div className="flex flex-row items-start w-72 p-0 h-[108px]">
+            <div className="w-64 h-28 text-[45px] non-italic leading-[54px] text-white font-thin font-inter tracking-normal">
               Hello!
               <p className="">
                 {" "}
                 from
-                <strong className="p-2 font-[600]">meway</strong>
+                <strong className="p-2 font-semibold">meway</strong>
               </p>
             </div>
           </div>
@@ -63,15 +66,15 @@ const LoginForm = () => {
 
         <div className="w-72 h-40 flex flex-col items-start p-0 gap-4 mt-[100px] ">
           <div className="w-72 h-40 flex flex-row items-center p-0 gap-9 relative">
-            <label className="w-28 h-5 pr-9 pb-3 text-[#FFFFFF] font-normal leading-[19px] font-[16px] font-inter">
+            <label className="w-28 h-5 pr-9 pb-3 text-white font-normal leading-[19px] text-base font-inter">
               Age
             </label>
 
             <div className="w-[137px] h-11 box-border relative">
               <div
-                className={`rounded-xl absolute left-0 top-0 bg-[#212121]
-                   w-[137px] h-11 border-solid border border-[#7E7E7E] text-[#D9D9D9]
-                   ${!selectedAge && "border-[#7E7E7E]"}`}
+                className={`rounded-xl absolute left-0 top-0 bg-neutral-800
+                   w-[137px] h-11 border-solid border border-zinc-500 text-zinc-300
+                   ${!selectedAge && "border-zinc-500"}`}
               >
                 {selectedAge ? (
                   <div
@@ -94,7 +97,7 @@ const LoginForm = () => {
                 )}
 
                 <div
-                  className="w-[42px] h-[42px] rounded-r-lg absolute left-[93px] bg-[#D9D9D9] top-0"
+                  className="w-[42px] h-[42px] rounded-r-lg absolute left-[93px] bg-zinc-300 top-0"
                   onClick={() => setOpen(!open)}
                 >
                   <div className="mt-[18px] ml-[14px] mr-[14px] absolute">
@@ -118,7 +121,7 @@ const LoginForm = () => {
               </div>
 
               <ul
-                className={`bg-white text-black w-32 mt-[48px] overflow-y-auto fixed z-30  ${
+                className={`bg-white text-black w-32 mt-[48px] overflow-y-auto fixed z-30 ${
                   open ? "max-h-60" : "max-h-0"
                 }`}
               >
@@ -126,7 +129,7 @@ const LoginForm = () => {
                   return (
                     <div key={index}>
                       <li
-                        className="text-center hover:bg-sky-600 hover:text-white "
+                        className="text-center hover:bg-sky-600 hover:text-white"
                         onClick={() => {
                           if (index !== selectedAge) {
                             setSelectedAge(index);
@@ -145,61 +148,24 @@ const LoginForm = () => {
           </div>
 
           <div className="w-72 h-40 flex flex-row items-center p-0 gap-9">
-            <label className="w-28 h-5 pr-9 pb-3 text-[#FFFFFF] font-normal leading-[19px] font-[16px] font-inter ">
+            <label className="w-28 h-5 pr-9 pb-3 text-white font-normal leading-[19px] text-base font-inter">
               Gender
             </label>
 
-            <div className="flex flex-row items-start p-0 gap-2.5 w-36 h-11">
-              <div className="w-11 h-10 relative">
-                <button
-                  className={`
-                  w-11 h-11 box-border rounded-xl absolute bg-[#212121] top-0 left-0
-                  border-solid  border 
-                  text-[#FFFFFF]
-                  font-normal font-[16px] leading-5 pt-2.5 px-4 pb-3
-                  ${
-                    selectedGender === "F"
-                      ? "border-[#FFFFFF]"
-                      : "border-[#7E7E7E]"
-                  }`}
-                  onClick={() => setSelectedGender("F")}
-                >
-                  F
-                </button>
-              </div>
-              <div className="w-11 h-10 relative pl-2.5">
-                <button
-                  className={`box-border 
-                        rounded-xl
-                        text-[#FFFFFF]
-                        absolute
-                        border-solid border 
-                        font-medium 
-                        font-[16px]
-                        top-0 left-0 w-11 h-11 pl-3.5 pr-3.5 pb-3 pt-2.5 bg-[#212121]
-                         ${
-                           selectedGender === "M"
-                             ? "border-[#FFFFFF]"
-                             : "border-[#7E7E7E]"
-                         }`}
-                  onClick={() => setSelectedGender("M")}
-                >
-                  M
-                </button>
-              </div>
-            </div>
+            <Buttons genderValue={selectedGender} selectedGenderValue={setSelectedGender}/>
+
           </div>
 
           <div className="w-72 h-40 flex flex-row items-center p-0 gap-9">
-            <label className="w-28 h-5 pb-3 text-[#FFFFFF] font-medium pr-9 leading-[19px] font-[16px] font-inter">
+            <label className="w-28 h-5 pb-3 text-white font-medium pr-9 leading-[19px] text-base font-inter">
               Destination
             </label>
 
-            <div className="relative w-[137px] h-11 ">
+            <div className="relative w-[137px] h-11">
               <input
                 type="text"
-                className="absolute bg-[#212121] rounded-xl pl-[15px]
-                border-solid border border-[#7E7E7E] w-[137px] h-11 text-white "
+                className="absolute bg-neutral-800 rounded-xl pl-[15px]
+                border-solid border border-zinc-500 w-[137px] h-11 text-white"
                 placeholder={"📍"}
                 id="designation"
                 name="designation"
@@ -212,18 +178,18 @@ const LoginForm = () => {
 
         {selectedAge && destination && selectedGender ? (
           <div
-            className=" flex flex-row justify-end items-end gap-[10px]
-                   self-stretch h-[37px] mt-[100px]
-                  ml-[32px]  mb-[39px] mr-[32px]"
+            className="flex flex-row justify-end items-end gap-[10px]
+            self-stretch h-[37px] mt-[100px]
+            ml-[32px]  mb-[39px] mr-[32px]"
           >
-            <p className="text-[white] mt-[18px]">Connect →</p>
+            <p className="text-white mt-[18px]">Connect →</p>
           </div>
         ) : (
-          <div className="flex flex-row justify-end text-[#FFFFFF] items-end gap-2.8 w-72 mt-[100px] h-[51px] ml-[32px] mr-[32px] mb-[32px]">
+          <div className="flex flex-row justify-end text-white items-end gap-2.8 w-72 mt-[100px] h-[51px] ml-[32px] mr-[32px] mb-[32px]">
             <span
-              className="font-normal font-[16px] flex justify-center items-center text-[#FFFFFF] w-72 
-                           pt-3 h-[51px]
-                            font-[100] leading-[19px] "
+              className="font-normal text-base flex justify-center items-center text-white w-72 
+               pt-3 h-[51px]
+               font-thin leading-[19px] "
             >
               Fill in the details to connect to the Internet.
             </span>
