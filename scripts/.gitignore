@@ -2,7 +2,8 @@
 references.txt
 
 # Videoslist
-*.csv
+videos_list.csv
+Videos-list.csv
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
