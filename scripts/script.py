@@ -11,7 +11,7 @@ from botocore.exceptions import ClientError
 import tempfile
 from typing import List
 import ntpath
-from pydantic import BaseModel
+from pydantic import BaseModel, validator, root_validator
 from pytube.cli import on_progress
 from urllib.parse import urlparse
 
@@ -21,82 +21,108 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-
-download_threads = []
-upload_threads = []
-
-class InvalidURL(Exception):
-    """Raise Exception when the URL is invalid"""
+class InvalidTimeStampError(Exception):
+    """Raise Exception when a timestamp is Invalid"""
+    pass
+class InvalidURLError(Exception):
+    """Raise Exception when the URL is Invalid"""
     pass
 
 class TimeStamp(BaseModel):
+    row_number: int
     start_min: int
     start_sec: int
     end_min: int
     end_sec: int
 
+    @root_validator(pre=True)
+    def check_seconds(cls, values):
+        start_min = values['start_min']
+        start_sec = values['start_sec']
+        end_min = values['end_min']
+        end_sec = values['end_sec']
+        if not (start_sec >= 0 and start_sec <= 60 and end_sec >= 0 and end_sec <= 60):
+            timestamp = f"{start_min}:{start_sec}-{end_min}:{end_sec}"
+            error_msg = f"The provided timestamp in line {values['row_number']} is Invalid. The timestamp contains invalid seconds. timestamp: {timestamp}"
+            raise InvalidTimeStampError(error_msg)
+        return values
+
+    @root_validator(pre=True)
+    def check_range_of_timestamp(cls, values):
+        start_min = values['start_min']
+        start_sec = values['start_sec']
+        end_min = values['end_min']
+        end_sec = values['end_sec']
+        timestamp = f"{start_min}:{start_sec}-{end_min}:{end_sec}"
+        if (start_min == 0) and (end_min == 0):
+            if start_sec > end_sec:
+                error_msg = f"The provided timestamp in line {values['row_number']} is Invalid. The start time in the timestamp is less than end time. timestamp: {timestamp}"
+                raise InvalidTimeStampError(error_msg)
+        if start_min > end_min:
+            error_msg = f"The provided timestamp in line {values['row_number']} is Invalid. The start minute in the timestamp is less than end minute. timestamp: {timestamp}"
+            raise InvalidTimeStampError(error_msg)
+        return values
+
 class VideoDetail(BaseModel):
+    row_number: int
     url: str
     timestamps: List[TimeStamp]
 
-class VideoList(BaseModel):
+    @validator('url', pre=True)
+    def check_url(cls, v, values, **kwargs):
+        result = urlparse(v)
+        if not all([result.scheme, result.netloc]):
+            error_msg = f"The URL provided in the line {values['row_number']} is Invalid. URL: {v}"
+            raise InvalidURLError(error_msg)
+        return v
+
+class VideosList(BaseModel):
     entry: List[VideoDetail]
 
-class YTExtractor():
-    def __init__(self, video_list):
-        self.video_list = video_list
-
-    def url_check(self, url):
-        try:
-            result = urlparse(url)
-            if all([result.scheme, result.netloc]):
-                return True
-            else:
-                return False
-        except:
-            return False
+class VideosListCSVParser():
+    def __init__(self, video_list_csv):
+        self.video_list_csv = video_list_csv
 
     def parse(self):
-        with open(self.video_list, mode ='r') as file:
-            video_list = []
+        videos_list = []
+        with open(self.video_list_csv, mode='r') as file:
             csvFile = csv.reader(file)
             csvList = list(enumerate(csvFile))
-            length = len(csvList)
-            if not length:
-                raise ValueError(f"The csv file {self.video_list} is empty!")
-            for index, row in csvList:
-                row_index = index +1
+            if not csvList:
+                error_msg = f"The provided csv file is empty. csv file name: {VIDEO_LIST}"
+                raise ValueError(error_msg)
+            for entry in csvList:
+                row_number = entry[0]+1
+                row = entry[1]
                 row_length = len(row)
                 if row_length == 0:
-                        print(f"The line {row_index} is empty!!!")
-                        continue
+                    continue
                 elif row_length != 2:
-                    raise IndexError(f"The row {row_index} of the csv file contains {row_length} columns.\nExpected: 2 columns")
-
+                    error_msg = f"The row {row_number} of the csv file contains {row_length} columns. Expected: 2 columns"
+                    raise IndexError(error_msg)
                 url = row[0]
-                if not self.url_check(url):
-                    raise InvalidURL(f"The provided url in the line {row_index} is INVALID.\n URL: {url}")
-                
+                timestamps = row[1]
                 separator = ';'
                 timestamps = row[1].split(separator)
+                ts_list = []
                 if not timestamps:
-                    raise ValueError(f"The timestamps in the row {row_index} is not properly separated by the separator: {separator}.\ntimestamps: {row[1]}")
-                yt_timestamps = []
-
+                    error_msg = f"The timestamps in the row: {row_number} is not properly separated by the separator: {separator}. timestamps: {row[1]}"
+                    raise ValueError(error_msg)
                 for timestamp in timestamps:
                     pattern = re.compile('\d{1,2}')
                     if not pattern.match(timestamp):
-                        raise ValueError(f"The timestamp format is not correct in the row {row_index}.\ntimestamp: {timestamp}")
-                    start_min, start_sec, end_min, end_sec = map(int, re.split('[:-]', timestamp))
+                        error_msg = f"The timestamp format is not correct in the row {row_number}. timestamp: {timestamp}"
+                        raise ValueError(error_msg)
+                    try:
+                        start_min, start_sec, end_min, end_sec = map(int, re.split('[:-]', timestamp))
+                    except ValueError as e:
+                        error_msg = f"The timestamp at line {row_number} is invalid. timestamp: {timestamp}"
+                        raise InvalidTimeStampError(error_msg) from e
+                    ts_list.append({'row_number': row_number,'start_min': start_min, 'start_sec': start_sec, 'end_min': end_min, 'end_sec': end_sec})
                     
-                    ts = TimeStamp(start_min=start_min, start_sec=start_sec, end_min=end_min, end_sec=end_sec)
-                    yt_timestamps.append(ts)
-                
-                vd = VideoDetail(url=url, timestamps=yt_timestamps)
-                video_list.append(vd)
-                
-            vl = VideoList(entry=video_list)
-            return vl
+                videos_list.append({'row_number': row_number, 'url': url, 'timestamps': ts_list})
+        v = VideosList(entry=videos_list)
+        return v
 
 def download_and_extract_yt_video(vd: VideoDetail) -> None:
     """Download Youtube Videos and Extract into subclips
@@ -110,7 +136,7 @@ def download_and_extract_yt_video(vd: VideoDetail) -> None:
     vid_title = vid.title
     print(f"Started downloading video: {vid_title}")
     downloaded_video_path = vid.download(DOWNLOAD_PATH)
-    print(f"Successfully downloaded video: {vid_title}\nDownload path: {downloaded_video_path}")
+    print(f"Successfully downloaded video: {vid_title} Download path: {downloaded_video_path}")
     print(f"Extracting subclips of the video: {vid_title}")
     for timestamp in vd.timestamps:
         extract_subclip(downloaded_video_path, timestamp)
@@ -180,9 +206,11 @@ if __name__ == "__main__":
     DOWNLOAD_PATH = download_folder
     EXTRACTED_ADS_PATH = temp_extract_ads_directory.name
 
-    yt_extractor = YTExtractor(VIDEO_LIST)
+    yt_extractor = VideosListCSVParser(VIDEO_LIST)
     vl = yt_extractor.parse()
 
+    download_threads = []
+    upload_threads = []
 
     for vd in vl.entry:
         process = Thread(target=download_and_extract_yt_video, kwargs={'vd': vd})
@@ -192,8 +220,8 @@ if __name__ == "__main__":
     for process in download_threads:
         process.join()
 
-    #UPLOADING
-
+    # # UPLOADING
+        
     AWS_ACCESS_KEY = os.environ.get('AWS_ACCESS_KEY')
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
     s3_client = boto3.client(
