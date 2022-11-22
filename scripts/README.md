@@ -17,6 +17,5 @@ Run `python script.py --help` for more details about the arguments.
 
 ```
 pipenv shell
-cd tests
 pytest
 ```

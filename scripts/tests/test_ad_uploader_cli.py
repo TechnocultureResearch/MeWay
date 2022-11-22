@@ -10,8 +10,8 @@ import ad_uploader_cli as cli
 
 class TestVideosListCSVParser:
 
-    invalid_csv_file = './invalid_video_list.csv'
-    valid_csv_file = './valid_video_list.csv'
+    invalid_csv_file = os.path.abspath('tests/invalid_video_list.csv')
+    valid_csv_file = os.path.abspath('tests/valid_video_list.csv')
 
     def test_invalid_timestamp(self):
         with pytest.raises(InvalidTimeStampError):
