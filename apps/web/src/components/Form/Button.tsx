@@ -1,12 +1,17 @@
 import React from "react";
 
-interface Props {
-  children?: React.ReactNode;
-  gender?: string;
+export interface ButtonProps
+  extends React.DetailedHTMLProps<
+      React.ButtonHTMLAttributes<HTMLButtonElement>,
+      HTMLButtonElement
+    >,
+    React.AriaAttributes {
+  text: React.ReactNode;
+  gender: string;
   onClick: () => void;
 }
 
-const Button: React.FC<Props> = ({ children, onClick, gender }) => {
+const Button: React.FC<ButtonProps> = ({ text, onClick, gender }) => {
   return (
     <button
       className={`
@@ -17,7 +22,7 @@ const Button: React.FC<Props> = ({ children, onClick, gender }) => {
             ${gender}`}
       onClick={onClick}
     >
-      {children}
+      {text}
     </button>
   );
 };
