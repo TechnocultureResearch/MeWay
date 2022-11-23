@@ -109,7 +109,7 @@ class VideosListCSVParser():
                     error_msg = f"The timestamps in the row: {row_number} is not properly separated by the separator: {separator}. timestamps: {row[1]}"
                     raise ValueError(error_msg)
                 for timestamp in timestamps:
-                    pattern = re.compile('\d{1,2}')
+                    pattern = re.compile(r'\d{1,2}')
                     if not pattern.match(timestamp):
                         error_msg = f"The timestamp format is not correct in the row {row_number}. timestamp: {timestamp}"
                         raise ValueError(error_msg)

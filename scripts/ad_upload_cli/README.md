@@ -1,5 +1,11 @@
 ### Install packages
 
+Navigate to the `ad_upload_cli` folder
+
+```
+cd scripts/ad_upload_cli
+```
+
 Using pipenv:
 ```
 pipenv install
@@ -8,10 +14,10 @@ pipenv install
 ### Run the script:
 
 ```
-python script.py <video_list.csv> <s3_bucket_name>
+python ad_uploader_cli.py <video_list.csv> <s3_bucket_name>
 ```
 
-Run `python script.py --help` for more details about the arguments.
+Run `python ad_uploader_cli.py --help` for more details about the arguments.
 
 ### Run Tests:
 
