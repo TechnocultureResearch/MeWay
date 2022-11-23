@@ -112,6 +112,12 @@ yarn.lock
 
 **/.env
 
+# Virtual Environments
+venv/
+env/
+virtualenv/
+virtual/
+
 # Ignore the .expo file
 .expo
 **/.expo
