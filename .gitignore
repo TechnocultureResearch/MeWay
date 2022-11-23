@@ -117,3 +117,7 @@ venv/
 env/
 virtualenv/
 virtual/
+
+# Ignore the .expo file
+.expo
+**/.expo
