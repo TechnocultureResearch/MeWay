@@ -9,7 +9,7 @@ export const HomeScreen = () => {
           This One Is MeWay-Tabl
         </Text>
       </View>
-      <File/>
+      <File />
     </SafeAreaView>
   );
 };
