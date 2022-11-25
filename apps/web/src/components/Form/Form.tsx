@@ -3,9 +3,9 @@ import Button from "./Button";
 import { FormLabel } from "./FormLabel";
 import { Footer } from "../Footer";
 import { inputHandler } from "../../utils/general";
-import Image from "next/image";
 import { InputField } from "./InputField";
-import emoji from "../assets/Emoji.svg";
+import Image from "next/image";
+import mypic from "../../assets/emoji.png";
 
 export const Form = () => {
   const [selectedAge, setSelectedAge] = useState<number>();
@@ -37,7 +37,7 @@ export const Form = () => {
                 </div>
               ) : (
                 <div className="absolute w-[24px] h-[24px] top-[9px] left-[13px]">
-                  <Image src={emoji} alt="emoji" />
+                  <Image src={mypic} alt="Picture of the author" />
                 </div>
               )}
             </div>
