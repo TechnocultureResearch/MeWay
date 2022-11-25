@@ -2,11 +2,11 @@
   "private": true,
   "name": "@meway/meway-tablet",
   "version": "0.0.0",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "lint": "eslint --ext js,ts,tsx .",
     "dev": "expo start",
-    "build": "expo export --output-dir ./build --platform all",
+    "build": "expo export --output-dir ./build --platform android",
     "start": "expo start",
     "android": "expo start --android",
     "web": "expo start --web",
