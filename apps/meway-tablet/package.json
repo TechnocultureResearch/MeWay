@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "eslint --ext js,ts,tsx .",
     "dev": "expo start",
-    "build": "expo export --output-dir ./build --platform all",
+    "build": "expo export --output-dir ./build --platform android",
     "start": "expo start",
     "android": "expo start --android",
     "web": "expo start --web",
@@ -31,7 +31,6 @@
     "react-native": "0.70.5",
     "react-native-web": "~0.18.7"
   },
-  "type": "module",
   "devDependencies": {
     "@babel/core": "^7.19.3",
     "@babel/preset-env": "^7.1.6",

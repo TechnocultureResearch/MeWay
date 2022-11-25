@@ -1,10 +1,16 @@
 {
-  "globalDependencies": ["$region","$aws_access_key_id","$aws_access_key_secret","$aws_bucket_key"],
+  "globalDependencies": [],
   "$schema": "https://turbo.build/schema.json",
   "pipeline": {
     "build": {
-      "dependsOn": ["^build"],
-      "outputs": ["dist/**", ".next/**",".expo/**"]
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "dist/**",
+        ".next/**",
+        ".expo/**"
+      ]
     },
     "lint": {
       "outputs": []
@@ -12,5 +18,11 @@
     "dev": {
       "cache": false
     }
-  }
+  },
+  "globalEnv": [
+    "region",
+    "aws_access_key_id",
+    "aws_access_key_secret",
+    "aws_bucket_key"
+  ]
 }
