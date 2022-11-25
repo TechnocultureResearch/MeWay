@@ -1,6 +1,10 @@
 {
     "version":"1.0.0",
+    
     "compilerOptions": {
+      "types": [
+        "node"
+      ],
       "target": "es2017",
       "lib": ["dom", "dom.iterable", "esnext"],
       "allowJs": true,

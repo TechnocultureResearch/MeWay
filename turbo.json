@@ -1,4 +1,5 @@
 {
+  "globalDependencies": ["$region","$aws_access_key_id","$aws_access_key_secret","$aws_bucket_key"],
   "$schema": "https://turbo.build/schema.json",
   "pipeline": {
     "build": {
