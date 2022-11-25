@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Button from "./Button";
 import { FormLabel } from "./FormLabel";
 import { Footer } from "../Footer";
-import { inputHandler } from "../utils/general";
+import { inputHandler } from "../../utils/general";
 import Image from "next/image";
 import { InputField } from "./InputField";
 import emoji from "../assets/Emoji.svg";
