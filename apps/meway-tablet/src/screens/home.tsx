@@ -1,6 +1,6 @@
 import React from "react";
 import { SafeAreaView, Text, View } from "react-native";
-
+import File from "../files/component";
 export const HomeScreen = () => {
   return (
     <SafeAreaView>
@@ -9,6 +9,7 @@ export const HomeScreen = () => {
           This One Is MeWay-Tabl
         </Text>
       </View>
+      <File/>
     </SafeAreaView>
   );
 };
