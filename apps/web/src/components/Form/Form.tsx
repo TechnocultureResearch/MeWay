@@ -6,6 +6,7 @@ import { inputHandler } from "../../utils/general";
 import { InputField } from "./InputField";
 import Image from "next/image";
 import mypic from "../../assets/emoji.png";
+import dropdown from "../../assets/vector.svg";
 
 export const Form = () => {
   const [selectedAge, setSelectedAge] = useState<number>();
@@ -37,7 +38,7 @@ export const Form = () => {
                 </div>
               ) : (
                 <div className="absolute w-[24px] h-[24px] top-[9px] left-[13px]">
-                  <Image src={mypic} alt="Picture of the author" />
+                  <Image src={mypic} alt="Emoji icon" />
                 </div>
               )}
             </div>
@@ -47,20 +48,7 @@ export const Form = () => {
               onClick={() => setOpen(!open)}
             >
               <div className="w-[14px] h-[24px] left-[13px] top-[15px] absolute">
-                <svg
-                  viewBox="0 0 16 9"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-[14px] h-[7px]"
-                >
-                  <path
-                    d="M15 1L8 8L1 1"
-                    stroke="black"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+                <Image src={dropdown} alt="dropdown icon" />
               </div>
             </div>
 
