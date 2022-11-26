@@ -7,7 +7,7 @@ import { makeDirectoryAsync } from "expo-file-system";
 import { createDownloadResumable } from "expo-file-system";
 let globalUrl = "";
 async function url() {
-  const url = await getSignedUrl(process.env.aws_bucket_key || "");
+  const url = await getSignedUrl("");
   globalUrl = url;
   return url;
 }

@@ -1,7 +1,7 @@
 import AWS from "aws-sdk";
 
 export default function createS3Instance() {
-  const s3 = new AWS.S3(AWS.config.loadFromPath('./config.json'));
+  const s3 = new AWS.S3(AWS.config.loadFromPath("./config.json"));
   return s3;
 }
 
