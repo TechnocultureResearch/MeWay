@@ -18,11 +18,5 @@
     "dev": {
       "cache": false
     }
-  },
-  "globalEnv": [
-    "region",
-    "aws_access_key_id",
-    "aws_access_key_secret",
-    "aws_bucket_key"
-  ]
+  }
 }
