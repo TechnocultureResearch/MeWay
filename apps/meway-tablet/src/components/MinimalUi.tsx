@@ -13,6 +13,7 @@ const MinimalUi = () => {
           />
           <Image />
         </View>
+        <View className="flex flex-row bg-violet-100 h-[180px] w-[1320px]"></View>
       </View>
     </SafeAreaView>
   );
