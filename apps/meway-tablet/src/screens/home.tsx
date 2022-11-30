@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-
 import { FlashList } from "@shopify/flash-list";
 
 export const HomeScreen = () => {

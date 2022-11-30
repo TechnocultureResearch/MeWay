@@ -8,6 +8,7 @@
       "userInterfaceStyle": "light",
       "platforms": [
         "android"
+    
       ],
       "updates": {
         "fallbackToCacheTimeout": 0
