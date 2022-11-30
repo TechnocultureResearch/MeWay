@@ -1,8 +1,5 @@
-import { registerRootComponent } from "expo";
-//No matching version found for eslint-config-custom@* inside the workspace
-import { App } from "./src/_app";
+/* eslint-disable no-undef */
 
-// registerRootComponent calls AppRegistry.registerComponent('main', () => App);
-// It also ensures that whether you load the app in Expo Go or in a native build,
-// the environment is set up appropriately
+import { registerRootComponent } from "expo";
+import { App } from "./src/_app"; /* CHANGE THE PATH BASED ON WHERE YOURS IS LOCATED */
 registerRootComponent(App);

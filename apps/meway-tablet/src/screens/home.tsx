@@ -1,36 +1,23 @@
-import React from "react";
-
+import * as React from 'react';
 import {
-  SafeAreaView,
-  Text,
-  TextInput,
   TouchableOpacity,
+  Text,
   View,
-} from "react-native";
+} from 'react-native';
+import {AppStateExample} from '../utilities/AppState';
 
-import { FlashList } from "@shopify/flash-list";
 
-export const HomeScreen = () => {
-  const [showPost, setShowPost] = React.useState<string | null>(null);
-
+export const HomeScreen=(props: { navigation: { navigate: (arg0: string) => void; }; })=> {
+  console.log(AppStateExample());
   return (
-    <SafeAreaView>
-      <View className="h-full w-full p-4">
-        <Text className="text-5xl font-bold mx-auto pb-2">
-          Create <Text className="text-indigo-500">MEWAY</Text> tablet
-        </Text>
-
-        <View className="py-2">
-          {showPost ? (
-            <Text>
-              <Text className="font-semibold"></Text>
-              {showPost}
-            </Text>
-          ) : (
-            <Text className="italic font-semibold">Meway-Button</Text>
-          )}
-        </View>
-      </View>
-    </SafeAreaView>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>HomeScreen To initiate BackGround Process go to background screen and register the task</Text>
+      <TouchableOpacity
+        onPress={() => {
+          props.navigation.navigate('BackgroundFetchScreen');
+        }}>
+        <Text className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>Navigate</Text>
+      </TouchableOpacity>
+    </View>
   );
-};
+}
