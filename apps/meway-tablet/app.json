@@ -13,7 +13,8 @@
       "backgroundColor": "#ffffff"
     },
     "platforms": [
-      "android"
+      "android",
+      "web"
     ],
     "updates": {
       "fallbackToCacheTimeout": 0

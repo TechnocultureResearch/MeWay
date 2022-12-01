@@ -1,16 +1,19 @@
 {
   "name": "@meway/tailwind-config",
   "version": "0.0.0",
-  "main": "index.js",
+  "main": "index.config.js",
   "license": "MIT",
   "files": [
-    "index.js",
-    "postcss.js"
+    "index.config.js",
+    "postcss.config.js",
+    "global.d.ts"
   ],
   "devDependencies": {
     "autoprefixer": "^10.4.7",
-    "postcss": "^8.4.14",
-    "tailwindcss": "^3.1.8",
-    "eslint-config-custom": "*"
+    "typescript": "^4.7.4",
+    "tailwindcss": "~3.2.1",
+    "postcss": "^8.4.19",
+    "eslint-config-custom": "*",
+    "eslint":"~8.28.0"
   }
 }
