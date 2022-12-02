@@ -1,14 +1,13 @@
 import React from "react";
 
 import { SafeAreaView, Text, View } from "react-native";
+import MinimalUi from "../components/MinimalUi";
 
 export const HomeScreen = () => {
   return (
     <SafeAreaView>
-      <View className="h-full w-full p-4">
-        <Text className="text-5xl font-bold mx-auto text-purple-600">
-          This One Is MeWay-Tablet
-        </Text>
+      <View className="h-screen w-screen p-[15px]">
+        <MinimalUi />
       </View>
     </SafeAreaView>
   );
