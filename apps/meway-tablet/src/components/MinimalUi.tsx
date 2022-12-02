@@ -5,30 +5,29 @@ import WidgetShell from "./WidgetShell";
 const MinimalUi = () => {
   return (
     <SafeAreaView>
-      <View className="sm:flex flex-col items-start w-full h-full p-3.4 gap-4 bg-violet-100">
-        <View className="w-[1336px] h-[750px] shadow-[0_0px_100px_10px_rgba(0_0_0_0.4)] gap-4">
+      <View className="flex flex-col items-start w-full h-full p-4 gap-1 gap-y-4 bg-violet-100">
+        <View className="w-full h-[794px] shadow-2xl">
           <Image
-            source={require("../../assets/RectangleImage.png")}
-            className="w-[1300px] h-[730px]"
+            source={require("../../assets/rectangleimg.png")}
+            className="w-full h-[794px] border-8 border-solid border-white rounded-2xl"
             resizeMode="stretch"
           />
-          <Image />
         </View>
 
-        <View className="flex-1 flex-row items-center justify-center gap-4  h-[190px] w-[1336px]">
-          <View className="w-[180px] h-180px]">
+        <View className="flex flex-row items-center justify-center gap-x-5 p-0 h-[180px] w-full">
+          <View>
             <WidgetShell
               title="Setup"
               content="Get a discount on first ride of upto INR 50."
-              footer="Start →"
+              text="Start →"
             />
           </View>
 
-          <View className="w-[180px] h-[180px]">
+          <View>
             <WidgetShell
               title="Wifi"
               content="Scan QR Code to connect to get free Wifi."
-              footer="Show QR →"
+              text="Show QR →"
             />
           </View>
 
