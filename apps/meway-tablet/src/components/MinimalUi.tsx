@@ -6,10 +6,10 @@ const MinimalUi = () => {
   return (
     <SafeAreaView>
       <View className="flex flex-col items-start w-full h-full p-4 gap-1 gap-y-4 bg-violet-100">
-        <View className="w-full h-[794px] shadow-2xl">
+        <View className="w-full h-[794px] rounded-2xl bg-white border-box border-[10px] border-solid border-white shadow-2xl">
           <Image
-            source={require("../../assets/rectangleimg.png")}
-            className="w-full h-[794px] border-8 border-solid border-white rounded-2xl"
+            source={require("../../assets/Image.png")}
+            className="w-full h-[770px] rounded-2xl"
             resizeMode="stretch"
           />
         </View>
