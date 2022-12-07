@@ -1,7 +1,6 @@
 import React from "react";
 
-import { SafeAreaView, Text, View } from "react-native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import { SafeAreaView, View } from "react-native";
 import MinimalUi from "../components/MinimalUi";
 
 export const HomeScreen = () => {
