@@ -1,0 +1,62 @@
+{
+  "private": true,
+  "name": "@meway/meway-tablet",
+  "version": "0.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "lint": "eslint --ext js,ts,tsx .",
+    "dev": "expo start",
+    "build": "expo export --output-dir ./build --platform android",
+    "start": "expo start",
+    "android": "expo start --android",
+    "web": "expo start --web",
+    "eas-build-pre-install": "npm install --global pnpm@7.x",
+    "eas-build-post-install": "pnpm run -w build:mobile"
+  },
+  "dependencies": {
+    "tailwind-config": "*",
+    "expo": "^47.0.0",
+    "expo-dev-client": "~2.0.0",
+    "expo-status-bar": "~1.4.2",
+    "expo-updates": "~0.15.4",
+    "react": "18.1.0",
+    "react-dom": "18.1.0",
+    "react-native": "0.70.5",
+    "react-native-web": "~0.18.7",
+    "nativewind": "2.0.10"
+  },
+  "devDependencies": {
+    "eslint-config-custom": "*",
+    "@babel/core": "^7.19.3",
+    "@types/react": "~18.0.25",
+    "@babel/preset-env":"^7.1.6",  
+    "@expo/webpack-config": "~0.17.2",
+    "autoprefixer": "^10.4.8",
+    "@types/react-dom": "~18.0.9",
+    "@types/react-native": "~0.70.5",
+    "babel-preset-expo": "~9.2.1",
+    "typescript": "^4.7.4",
+    "tailwindcss": "~3.2.1",
+    "postcss": "^8.4.19",
+    "postcss-loader": "^4.2.0",
+    "webpack": "^4.0.0"
+
+  },
+  "eslintConfig": {
+    "extends": "eslint-config-custom",
+    "ignorePatterns": [
+      "node_modules",
+      "build",
+      ".expo",
+      ".expo-shared"
+    ],
+    "overrides": [
+      {
+        "files": ["*.js"],
+        "env": {
+          "node": true
+        }
+      }
+    ]
+  }
+}

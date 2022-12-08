@@ -3,43 +3,43 @@
     "version": "0.0.1",
     "private": true,
     "workspaces": [
-        "apps/*",
-        "packages/*"
+      "apps/*",
+      "packages/*"
     ],
     "scripts": {
-        "build": "turbo run build",
-        "dev": "turbo run dev --parallel",
-        "lint": "turbo run lint",
-        "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-        "hooks": "husky install",
-        "test": "echo 'no tests added yet'"
+      "build": "turbo run build",
+      "dev": "turbo run dev --parallel",
+      "lint": "turbo run lint",
+      "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+      "installhooks": "husky install",
+      "test": "echo 'no tests added yet'"
     },
     "devDependencies": {
-        "@commitlint/cli": "^17.0.3",
-        "@commitlint/config-conventional": "^17.0.3",
-        "autoprefixer": "^10.4.8",
-        "eslint-config-custom": "workspace:*",
-        "husky": "^8.0.1",
-        "lint-staged": "^13.0.3",
-        "postcss": "^8.4.16",
-        "prettier": "^2.7.1",
-        "tailwindcss": "^3.1.8",
-        "turbo": "^1.4.3"
+      "@commitlint/cli": "17.3.0",
+      "@commitlint/config-conventional": "^17.3.0",
+      "autoprefixer": "^10.4.8",
+      "eslint-config-custom": "*",
+      "husky": "^8.0.1",
+      "lint-staged": "^13.0.3",
+      "postcss": "^8.4.16",
+      "prettier": "^2.7.1",
+      "tailwindcss": "^3.1.8",
+      "turbo": "^1.4.3"
     },
     "engines": {
-        "npm": ">=7.0.0",
-        "node": ">=14.0.0"
+      "npm": ">=7.0.0",
+      "node": ">=14.0.0"
     },
     "packageManager": "pnpm@7.5.2",
     "lint-staged": {
-        "**/*.{js,jsx,json}": [
-            "eslint . --fix",
-            "prettier --write ."
-        ]
+      "**/*.{js,jsx,json}": [
+        "eslint . --fix",
+        "prettier --write ."
+      ]
     },
     "husky": {
-        "hooks": {
-            "pre-commit": "lint-staged"
-        }
+      "hooks": {
+        "pre-commit": "lint-staged"
+      }
     }
-}
+  }
