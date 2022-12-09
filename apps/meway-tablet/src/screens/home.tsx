@@ -1,15 +1,24 @@
-import React from "react";
+import * as React from "react";
+import { TouchableOpacity, Text, View } from "react-native";
 
-import { SafeAreaView, Text, View } from "react-native";
-
-export const HomeScreen = () => {
+export const HomeScreen = (props: {
+  navigation: { navigate: (arg0: string) => void };
+}) => {
   return (
-    <SafeAreaView>
-      <View className="h-full w-full p-4">
-        <Text className="text-5xl font-bold mx-auto text-purple-600">
-          This One Is MeWay-Tablet
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <Text>
+        HomeScreen To initiate BackGround Process go to background screen and
+        register the task
+      </Text>
+      <TouchableOpacity
+        onPress={() => {
+          props.navigation.navigate("FaceCount");
+        }}
+      >
+        <Text className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          Navigate
         </Text>
-      </View>
-    </SafeAreaView>
+      </TouchableOpacity>
+    </View>
   );
 };
