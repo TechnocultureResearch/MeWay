@@ -1,1 +1,1 @@
-declare module "@meway/tailwind-config";
+declare module "tailwind-config";

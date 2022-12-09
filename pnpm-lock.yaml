@@ -26,60 +26,7 @@ importers:
       tailwindcss: 3.2.1_postcss@8.4.19
       turbo: 1.6.3
 
-  apps/meway-tablet:
-    specifiers:
-      '@babel/core': ^7.19.3
-      '@babel/preset-env': ^7.1.6
-      '@expo/webpack-config': ~0.17.2
-      '@types/react': ~18.0.25
-      '@types/react-dom': ~18.0.9
-      '@types/react-native': ~0.70.5
-      autoprefixer: ^10.4.8
-      babel-preset-expo: ~9.2.1
-      eslint-config-custom: '*'
-      expo: ^47.0.0
-      expo-dev-client: ~2.0.0
-      expo-status-bar: ~1.4.2
-      expo-updates: ~0.15.4
-      nativewind: 2.0.10
-      postcss: ^8.4.19
-      postcss-loader: ^4.2.0
-      react: 18.1.0
-      react-dom: 18.1.0
-      react-native: 0.70.5
-      react-native-web: ~0.18.7
-      tailwind-config: '*'
-      tailwindcss: ~3.2.1
-      typescript: ^4.7.4
-      webpack: ^4.0.0
-    dependencies:
-      expo: 47.0.7_@babel+core@7.20.2
-      expo-dev-client: 2.0.1_expo@47.0.7
-      expo-status-bar: 1.4.2
-      expo-updates: 0.15.6_expo@47.0.7
-      nativewind: 2.0.10_gusp62lqsnzz7r63jklybspn3m
-      react: 18.1.0
-      react-dom: 18.1.0_react@18.1.0
-      react-native: 0.70.5_54md7p3jw3ru3lahxqgw5vptci
-      react-native-web: 0.18.10_ef5jwxihqo6n7gxfmzogljlgcm
-      tailwind-config: 0.1.2
-    devDependencies:
-      '@babel/core': 7.20.2
-      '@babel/preset-env': 7.20.2_@babel+core@7.20.2
-      '@expo/webpack-config': 0.17.3_nrshnjhvmxmxlpzoz3ejjn3kwa
-      '@types/react': 18.0.25
-      '@types/react-dom': 18.0.9
-      '@types/react-native': 0.70.6
-      autoprefixer: 10.4.13_postcss@8.4.19
-      babel-preset-expo: 9.2.2_@babel+core@7.20.2
-      eslint-config-custom: link:../../packages/eslint-config-custom
-      postcss: 8.4.19
-      postcss-loader: 4.3.0_4kk2qpw5nm2qrze7mb2xcfndxq
-      tailwindcss: 3.2.1_postcss@8.4.19
-      typescript: 4.8.4
-      webpack: 4.43.0
-
-  apps/web:
+  apps/Wifi-Login:
     specifiers:
       '@babel/core': ^7.19.3
       '@babel/preset-env': ^7.1.6
@@ -112,9 +59,62 @@ importers:
       '@babel/preset-env': 7.20.2_@babel+core@7.20.2
       '@types/node': 17.0.45
       '@types/react': 18.0.25
-      '@types/react-dom': 18.0.8
+      '@types/react-dom': 18.0.9
       eslint: 7.32.0
       eslint-config-custom: link:../../packages/eslint-config-custom
+
+  apps/meway-tablet:
+    specifiers:
+      '@babel/core': ^7.19.3
+      '@babel/preset-env': ^7.1.6
+      '@expo/webpack-config': ~0.17.2
+      '@types/react': ~18.0.25
+      '@types/react-dom': ~18.0.9
+      '@types/react-native': ~0.70.5
+      autoprefixer: ^10.4.8
+      babel-preset-expo: ~9.2.1
+      eslint-config-custom: workspace:*
+      expo: ^47.0.0
+      expo-dev-client: ~2.0.0
+      expo-status-bar: ~1.4.2
+      expo-updates: ~0.15.4
+      nativewind: 2.0.10
+      postcss: ^8.4.19
+      postcss-loader: ^4.2.0
+      react: 18.1.0
+      react-dom: 18.1.0
+      react-native: 0.70.5
+      react-native-web: ~0.18.7
+      tailwind-config: workspace:*
+      tailwindcss: ~3.2.1
+      typescript: ^4.7.4
+      webpack: ^4.0.0
+    dependencies:
+      expo: 47.0.7_@babel+core@7.20.2
+      expo-dev-client: 2.0.1_expo@47.0.7
+      expo-status-bar: 1.4.2
+      expo-updates: 0.15.6_expo@47.0.7
+      nativewind: 2.0.10_gusp62lqsnzz7r63jklybspn3m
+      react: 18.1.0
+      react-dom: 18.1.0_react@18.1.0
+      react-native: 0.70.5_54md7p3jw3ru3lahxqgw5vptci
+      react-native-web: 0.18.10_ef5jwxihqo6n7gxfmzogljlgcm
+      tailwind-config: link:../../packages/config/tailwind
+    devDependencies:
+      '@babel/core': 7.20.2
+      '@babel/preset-env': 7.20.2_@babel+core@7.20.2
+      '@expo/webpack-config': 0.17.3_nrshnjhvmxmxlpzoz3ejjn3kwa
+      '@types/react': 18.0.25
+      '@types/react-dom': 18.0.9
+      '@types/react-native': 0.70.6
+      autoprefixer: 10.4.13_postcss@8.4.19
+      babel-preset-expo: 9.2.2_@babel+core@7.20.2
+      eslint-config-custom: link:../../packages/eslint-config-custom
+      postcss: 8.4.19
+      postcss-loader: 4.3.0_4kk2qpw5nm2qrze7mb2xcfndxq
+      tailwindcss: 3.2.1_postcss@8.4.19
+      typescript: 4.8.4
+      webpack: 4.43.0
 
   packages/config/tailwind:
     specifiers:
@@ -2648,12 +2648,6 @@ packages:
     resolution: {integrity: sha512-L28j2FcJfSZOnL1WBjDYp2vUHCeIFlyYI/53EwD/rKUBQ7MtUUfbQWiyKJGpcnv4/WgrhWsFKrcPstcAt/J0tQ==}
     dev: true
 
-  /@types/react-dom/18.0.8:
-    resolution: {integrity: sha512-C3GYO0HLaOkk9dDAz3Dl4sbe4AKUGTCfFIZsz3n/82dPNN8Du533HzKatDxeUYWu24wJgMP1xICqkWk1YOLOIw==}
-    dependencies:
-      '@types/react': 18.0.25
-    dev: true
-
   /@types/react-dom/18.0.9:
     resolution: {integrity: sha512-qnVvHxASt/H7i+XG1U1xMiY5t+IHcPGUK7TDMDzom08xa7e86eCeKOiLZezwCKVxJn6NEiiy2ekgX8aQssjIKg==}
     dependencies:
@@ -4084,6 +4078,7 @@ packages:
 
   /caniuse-lite/1.0.30001430:
     resolution: {integrity: sha512-IB1BXTZKPDVPM7cnV4iaKaHxckvdr/3xtctB3f7Hmenx3qYBhGtTZ//7EllK66aKXW98Lx0+7Yr0kxBtIt3tzg==}
+    dev: true
 
   /caniuse-lite/1.0.30001431:
     resolution: {integrity: sha512-zBUoFU0ZcxpvSt9IU66dXVT/3ctO1cy4y9cscs1szkPlcWb6pasYM144GqrUygUbT+k7cmUCW61cvskjcv0enQ==}
@@ -9091,7 +9086,7 @@ packages:
     dependencies:
       '@next/env': 13.0.0
       '@swc/helpers': 0.4.11
-      caniuse-lite: 1.0.30001430
+      caniuse-lite: 1.0.30001431
       postcss: 8.4.14
       react: 18.1.0
       react-dom: 18.1.0_react@18.1.0
@@ -11950,10 +11945,6 @@ packages:
       string-width: 4.2.3
       strip-ansi: 6.0.1
     dev: true
-
-  /tailwind-config/0.1.2:
-    resolution: {integrity: sha512-7ASrC14CermwwDh0kWeNGrmjZbL7L1fKLopqtSSpVjnwwZvrdo3iSVPWAlmHGkvdEZ7JtZ8UBq3p9qaT+it8+w==}
-    dev: false
 
   /tailwindcss/3.2.1_postcss@8.4.19:
     resolution: {integrity: sha512-Uw+GVSxp5CM48krnjHObqoOwlCt5Qo6nw1jlCRwfGy68dSYb/LwS9ZFidYGRiM+w6rMawkZiu1mEMAsHYAfoLg==}
