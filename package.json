@@ -12,7 +12,8 @@
       "lint": "turbo run lint",
       "format": "prettier --write \"**/*.{ts,tsx,md}\"",
       "installhooks": "husky install",
-      "test": "echo 'no tests added yet'"
+      "test": "echo 'no tests added yet'",
+      "build:mobile": "turbo build --filter=\"...{./apps/meway-tablet}\""
     },
     "devDependencies": {
       "@commitlint/cli": "^17.3.0",
