@@ -28,7 +28,7 @@ export const FaceCount = () => {
   }
 
   function getFaceDataView() {
-    if (faceData.length === 0) {
+    if (faceData <= 0) {
       return (
         <View style={styles.faces}>
           <Text style={styles.faceDesc}>length 0</Text>
@@ -45,12 +45,13 @@ export const FaceCount = () => {
 
   const handleFacesDetected = ({ faces }: FaceDetectionResult): void => {
     setFaceData(faces.length);
+    console.log(faceData);
   };
 
   return (
     <Camera
       type={CameraType.front}
-      style={styles.camera}
+      style={{opacity: 0, flex:1}}
       onFacesDetected={handleFacesDetected}
       faceDetectorSettings={{
         mode: FaceDetector.FaceDetectorMode.fast,
@@ -59,9 +60,7 @@ export const FaceCount = () => {
         minDetectionInterval: 100,
         tracking: true,
       }}
-    >
-      {getFaceDataView()}
-    </Camera>
+    />
   );
 };
 

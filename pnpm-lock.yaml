@@ -69,8 +69,8 @@ importers:
       '@babel/preset-env': ^7.1.6
       '@expo/html-elements': ^0.2.2
       '@expo/webpack-config': ~0.17.2
-      '@meway/eslint-config-custom': '*'
-      '@meway/tailwind-config': '*'
+      '@react-navigation/native': ^6.1.0
+      '@react-navigation/stack': ^6.3.8
       '@types/react': ~18.0.25
       '@types/react-dom': ~18.0.9
       '@types/react-native': ~0.70.5
@@ -98,7 +98,9 @@ importers:
       typescript: ^4.7.4
       webpack: ^4.0.0
     dependencies:
-      '@meway/tailwind-config': link:../../packages/config/tailwind
+      '@expo/html-elements': 0.2.2
+      '@react-navigation/native': 6.1.0_tj3nonr5gneraukzjkxpsiy7yu
+      '@react-navigation/stack': 6.3.8_igizqs2r7wfv3ywqkqb34fcm6m
       expo: 47.0.7_@babel+core@7.20.2
       expo-camera: 13.1.0_expo@47.0.7+react@18.1.0
       expo-dev-client: 2.0.1_expo@47.0.7
