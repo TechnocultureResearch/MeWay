@@ -16,10 +16,10 @@
       "build:mobile": "turbo build --filter=\"...{./apps/meway-tablet}\""
     },
     "devDependencies": {
-      "@commitlint/cli": "^17.3.0",
+      "@commitlint/cli": "17.3.0",
       "@commitlint/config-conventional": "^17.3.0",
       "autoprefixer": "^10.4.8",
-      "@meway/eslint-config-custom": "*",
+      "eslint-config-custom": "*",
       "husky": "^8.0.1",
       "lint-staged": "^13.0.3",
       "postcss": "^8.4.16",
