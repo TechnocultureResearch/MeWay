@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@expo/html-elements": "^0.2.2",
-    "@meway/tailwind-config": "*",
+    "tailwind-config": "workspace:*",
     "@react-navigation/native": "^6.1.0",
     "@react-navigation/stack": "^6.3.8",
     "expo": "^47.0.0",
@@ -37,7 +37,7 @@
     "@babel/core": "^7.19.3",
     "@babel/preset-env": "^7.1.6",
     "@expo/webpack-config": "~0.17.2",
-    "@meway/eslint-config-custom": "*",
+    "eslint-config-custom": "workspace:*",
     "@types/react": "~18.0.25",
     "@types/react-dom": "~18.0.9",
     "@types/react-native": "~0.70.5",
@@ -50,7 +50,7 @@
     "webpack": "^4.0.0"
   },
   "eslintConfig": {
-    "extends": "@meway/eslint-config-custom",
+    "extends": "eslint-config-custom",
     "ignorePatterns": [
       "node_modules",
       "build",

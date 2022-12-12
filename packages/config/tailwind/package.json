@@ -1,12 +1,11 @@
 {
-  "name": "@meway/tailwind-config",
+  "name": "tailwind-config",
   "version": "0.0.0",
   "main": "index.config.js",
   "license": "MIT",
   "files": [
     "index.config.js",
-    "postcss.config.js",
-    "global.d.ts"
+    "postcss.config.js"
   ],
   "devDependencies": {
     "autoprefixer": "^10.4.7",
