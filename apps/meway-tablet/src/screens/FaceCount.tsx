@@ -8,6 +8,8 @@ import {
   Face,
   FaceDetectionResult,
 } from "expo-camera/build/Camera.types";
+import { fontScale } from "nativewind";
+import Colors from "../constants/Colors";
 
 export const FaceCount = () => {
   const [hasPermission, setHasPermission] = React.useState(Boolean);
@@ -49,18 +51,21 @@ export const FaceCount = () => {
   };
 
   return (
-    <Camera
-      type={CameraType.front}
-      style={{opacity: 0, flex:1}}
-      onFacesDetected={handleFacesDetected}
-      faceDetectorSettings={{
-        mode: FaceDetector.FaceDetectorMode.fast,
-        detectLandmarks: FaceDetector.FaceDetectorLandmarks.none,
-        runClassifications: FaceDetector.FaceDetectorClassifications.none,
-        minDetectionInterval: 100,
-        tracking: true,
-      }}
-    />
+    <>
+      <Text style={{ fontSize: 50 }}>{faceData}</Text>
+      <Camera
+        type={CameraType.front}
+        style={{ opacity: 0, flex: 1 }}
+        onFacesDetected={handleFacesDetected}
+        faceDetectorSettings={{
+          mode: FaceDetector.FaceDetectorMode.fast,
+          detectLandmarks: FaceDetector.FaceDetectorLandmarks.none,
+          runClassifications: FaceDetector.FaceDetectorClassifications.none,
+          minDetectionInterval: 100,
+          tracking: true,
+        }}
+      />
+    </>
   );
 };
 

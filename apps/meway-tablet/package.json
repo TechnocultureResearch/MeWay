@@ -2,7 +2,7 @@
   "private": true,
   "name": "@meway/meway-tablet",
   "version": "0.0.0",
-  "main": "index.ts",
+  "main": "index.js",
   "scripts": {
     "lint": "eslint --ext js,ts,tsx .",
     "dev": "expo start",
