@@ -3,6 +3,7 @@ module.exports = {
     "./src/**/*.{ts,tsx}",
     "./public/index.html",
     "./pages/**/*.{ts,tsx}",
+    "./screens/**/*.{ts,tsx}"
   ],
   theme: {
     fontFamily: {
