@@ -128,7 +128,7 @@ export const Form = () => {
         </div>
       </div>
 
-      <div className="flex flex-row items-end justify-end p-0 gap-2.5 w-full h-14 self-stretch">
+      <div className="flex flex-col justify-center items-center p-0 gap-2.5 w-full h-14 self-stretch">
         <Footer
           age={selectedAge}
           destination={destination}
