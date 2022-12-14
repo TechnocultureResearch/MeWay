@@ -1,5 +1,6 @@
 {
   "expo": {
+    "owner":"technoculture",
     "name": "meway-tablet",
     "slug": "meway",
     "version": "1.0.0",
