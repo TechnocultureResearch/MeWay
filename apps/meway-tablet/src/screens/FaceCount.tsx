@@ -1,4 +1,4 @@
-import { Text} from "react-native";
+import { Text } from "react-native";
 import React from "react";
 import { Camera } from "expo-camera";
 import * as FaceDetector from "expo-face-detector";
@@ -31,7 +31,7 @@ export const FaceCount = () => {
 
   return (
     <>
-      <Text style={{ fontSize: 50 }}>{faceData}</Text>
+      <Text className="text-orange-600/100 font-bold">{faceData}</Text>
       <Camera
         type={CameraType.front}
         style={{ opacity: 0, flex: 1 }}
@@ -47,4 +47,3 @@ export const FaceCount = () => {
     </>
   );
 };
-
