@@ -1,5 +1,16 @@
-/* eslint-disable no-undef */
+import 'expo-dev-client';
+import 'react-native-get-random-values';
+import React from 'react';
+import {registerRootComponent} from 'expo'
+import {AppWrapperNonSync} from "./src/AppWrapperNonSync";
+import {AppWrapperSync} from './src/AppWrapperSync';
+import {SYNC_CONFIG} from './sync.config';
 
-import { registerRootComponent } from "expo";
-import { App } from "./src/_app"; /* CHANGE THE PATH BASED ON WHERE YOURS IS LOCATED */
+const App = () =>
+  SYNC_CONFIG.enabled ? (
+    <AppWrapperSync appId={SYNC_CONFIG.appId} />
+  ) : (
+    <AppWrapperNonSync />
+  );
+
 registerRootComponent(App);
