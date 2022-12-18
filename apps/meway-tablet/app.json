@@ -1,6 +1,6 @@
 {
   "expo": {
-    "owner":"technoculture",
+    "owner": "technoculture",
     "name": "meway-tablet",
     "slug": "meway",
     "version": "1.0.0",
@@ -31,6 +31,23 @@
       "eas": {
         "projectId": "4e25e43f-a276-43c2-aa24-feafb645c1fc"
       }
-    }
-  }
+    },
+    "plugins": [
+      "sentry-expo"
+    ]
+  },
+  "hooks": {
+      "postPublish": [
+        {
+          "file": "sentry-expo/upload-sourcemaps",
+          "config": {
+            "organization": "#techno",
+            "project": "meway",
+            "authToken": "22c3d2c07f7449f294c65ff794998b86a9f3de7416bb4adabcbc7e5b5d285868",
+            "setCommits":"true"
+        }
+      }
+    ]
+  },
+  "plugins": ["sentry-expo"]
 }
