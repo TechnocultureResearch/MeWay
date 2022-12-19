@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { View, Text, TouchableOpacity, Button } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { gazeMachineContext } from "../machines/navigationMachine";
 
 const AddButton = () => {

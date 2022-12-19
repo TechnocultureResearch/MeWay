@@ -55,15 +55,13 @@
 
 // export default MinimalUi;
 
-import React, { useContext } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import React from "react";
+import { View } from "react-native";
 import AddButton from "./AddButton";
 import RandomApp from "./RandomApp";
 import DecreaseButton from "./DecreaseButton";
 import WidgetShell from "./WidgetShell";
-// import { GlobalStateContext } from "./GlobalState";
-import { useMachine, useSelector } from "@xstate/react";
-import { StateFrom, StateMachine } from "xstate";
+import { useMachine } from "@xstate/react";
 import { gazeMachine, gazeMachineContext } from "../machines/navigationMachine";
 
 const MinimalUi = () => {
@@ -74,13 +72,15 @@ const MinimalUi = () => {
   return (
     <gazeMachineContext.Provider value={{ send, state }}>
       <View className="flex gap-[15px]">
-        <View
-          className={`h-[70%]  bg-white
+        <View>
+          <View
+            className={`h-[70%]  bg-white
       ${state.matches("attract_gaze") ? "w-[64vw]" : ""}
 
       `}
-        >
-          {state.matches("attract_gaze") && <RandomApp />}
+          >
+            {state.matches("attract_gaze") && <RandomApp />}
+          </View>
         </View>
         <View className="h-[180px] justify-center items-center flex flex-row gap-5  ">
           {state.matches("passenger_present") ? <DecreaseButton /> : ""}

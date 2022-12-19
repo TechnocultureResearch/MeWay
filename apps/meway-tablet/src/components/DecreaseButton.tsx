@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
-import { View, Text, TouchableOpacity, Button } from "react-native";
-import { gazeMachine, gazeMachineContext } from "../machines/navigationMachine";
+import { View, Text, TouchableOpacity } from "react-native";
+import { gazeMachineContext } from "../machines/navigationMachine";
 
 const DecreaseButton = () => {
-  const { send, state } = useContext(gazeMachineContext);
+  const { send } = useContext(gazeMachineContext);
   return (
     <TouchableOpacity
       onPress={() => {
