@@ -6,7 +6,6 @@ import {TaskRealmContext} from './models';
 import {LoginScreen} from './components/LoginScreen';
 import colors from './styles/colors';
 import {AppSync} from './AppSync';
-import { FaceCount } from './screens/FaceCount';
 
 export const AppWrapperSync: React.FC<{
   appId: string;
@@ -19,7 +18,6 @@ export const AppWrapperSync: React.FC<{
       <AppProvider id={appId}>
         <UserProvider fallback={LoginScreen}>
           <RealmProvider sync={{flexible: true}}>
-            <FaceCount/>
             <AppSync />
           </RealmProvider>
         </UserProvider>

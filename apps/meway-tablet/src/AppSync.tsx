@@ -2,37 +2,42 @@ import React, {useCallback, useEffect, useMemo} from 'react';
 import {useApp, useUser} from '@realm/react';
 import {Pressable, StyleSheet, Text} from 'react-native';
 
-import {Task} from './models/Task';
+import PersonSchema from './models/Task';
 import {TaskRealmContext} from './models';
-import {TaskManager} from './components/TaskManager';
 import {buttonStyles} from './styles/button';
 import {shadows} from './styles/shadows';
 import colors from './styles/colors';
-
+import RealmDB from './components/RealmDb';
 const {useRealm, useQuery} = TaskRealmContext;
 
 export const AppSync: React.FC = () => {
   const realm = useRealm();
   const user = useUser();
   const app = useApp();
-  const result = useQuery(Task);
 
-  const tasks = useMemo(() => result.sorted('createdAt'), [result]);
+  const databaseOptions = {
+    path: 'meway-tablet.realm',
+    schema: [PersonSchema],
+    schemaVersion: 0, //optional
+};
 
-  useEffect(() => {
-    realm.subscriptions.update(mutableSubs => {
-      mutableSubs.add(realm.objects(Task));
+  const queryAllTodoLists = () => new Promise((resolve, reject) => {
+    Realm.open(databaseOptions).then(realm => {
+        const allTodoLists = realm.objects('PersonSchema');
+        resolve(allTodoLists);
+    }).catch((error) => {
+        reject(error);
     });
-  }, [realm, result]);
-
+});
+// console.log(queryAllTodoLists());
   const handleLogout = useCallback(() => {
     user?.logOut();
   }, [user]);
 
   return (
     <>
+      <RealmDB/>
       <Text style={styles.idText}>Syncing with app id: {app.id}</Text>
-      <TaskManager tasks={tasks} userId={user?.id} />
       <Pressable style={styles.authButton} onPress={handleLogout}>
         <Text
           style={styles.authButtonText}>{`Logout ${user?.profile.email}`}</Text>
