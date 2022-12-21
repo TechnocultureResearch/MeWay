@@ -5,6 +5,12 @@ import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withTiming,
+  FadeIn,
+  BounceInRight,
+  FlipInYRight,
+  StretchInY,
+  FadeOut,
+  FlipOutYLeft,
 } from "react-native-reanimated";
 import { gazeMachine } from "../machines/navigationMachine";
 
@@ -12,7 +18,7 @@ const RandomApp = () => {
   const [state, send] = useMachine<any>(gazeMachine, {});
   const scale = useSharedValue(0.2);
 
-  const reAnimatedStyle = useAnimatedStyle(() => {
+  const randomAppStyle = useAnimatedStyle(() => {
     return {
       transform: [{ scale: scale.value }],
     };
@@ -27,7 +33,8 @@ const RandomApp = () => {
 
     
   `}
-      style={[{}, reAnimatedStyle]}
+      exiting={FlipOutYLeft}
+      style={[{}, randomAppStyle]}
     >
       <Button
         title="SHOW"

@@ -1,5 +1,6 @@
-import { createMachine, interpret } from "xstate";
+import { createMachine, interpret,  } from "xstate";
 import { createContext } from "react";
+import { useService} from '@xstate/react/lib/fsm'
 export interface deviceContext {
   volume: number;
   gaze_timeout_s: number;
@@ -46,7 +47,7 @@ export type state =
       context: deviceContext;
     };
 
-export const gazeMachine =
+ export const gazeMachine =
   /** @xstate-layout N4IgpgJg5mDOIC5RQIYC8wDoCWEA2YAxAAoCCAyuQKIByA4lQEoD6AIlQCpUDCXrA2gAYAuolAAHAPaxsAF2ySAdmJAAPRAEYArACZMANkFGdAZgAs+nYK0BOAOxmANCACemkxsw3vNgBxnvQTsbQzMAXzDnVAxMcRRYWDBFGAAnZnEUuCTZEgpqeiZmABkqADEOIVEkECkZeSUVdQQTK0wWjV8dMy1fTrMrO2c3ZsEvfX99DR07QXt9MzNfCKj0LDiEpNT0zMTFWRx8IjpSAC0qSpVauQVlaqaNIKHNXTNMHS6bQV87Fp15k2WIGia3iuy2GSyewOBEIqlgshQsiwKAAZkiUgAKMxGQQASkIwNioM2YDSEN2+1wBAu1Su9VuoCaOg0dgMONMFistgcTwQti0mDsDhs2IWXy6WkBhPWYNJ20h+0RshSKAAxrJmMDCMczjSJNJrg07poWbyNGYfoKPqZ5hZenYpasiRtknLydlMEqVerNatYfDEci0aSMSYcfjpcTXWSdh6vWqNcC9TUDfTGogtHZfF4ploLT9BCYWr5eaEvD5FtjZotHTEZSSYwrMAALFziOXxn1anXnESXVM3dPNDQmAw+fT6Ow6XT2HRmky6LzCjwPWaCDS1kEu8GxqGt9tpTuJv1whFIz3BzFacMEp316Pyikttsd2TKhO+jDJumD43D0f6OOk7Tjos5muaryzN4CwaIBXSbs6sqNk+KJ4Ng4jMKqzYoIoihgHg2qnL2VT6nUv6MhmMxvAEfi6FmJiGCYZqmHo7wBCYvhaJmGgjgh947k2qHoZh2G4fh-pnkG6IYtoN6Rtubq7vsQkYVhOF4Xg34DkaFF8r4owfLR0y+Axhbgf4VrsVxHidEskRAneUYCShKDYARPZaWROlqBm+nUd4nHGaZTGuCa5hvB814LP0uh8U5ilNtgiifkcRHMIwVAALIAPIAGpUAIfa0tpDI+Qgk68qKmA0fYRj0XYHRxQpyEeklKXQkQp6Bhe0lhkYEaOc1j6tclhJUmAnmGqVTT6fobyWBYtjGLM852HNU4BFYXS9COdkrHW8UtVCbWEqqUAaBJ3WotJ179beB1De6x2jU6Z0aJNaZ-g8OjZlMAQmSYMy6Bxq3rdagjbb4u1NUhw3Pe1Z06Jd57XSG+l3fJsNPZSL0xIjH3kWVf02F43y3f4XwmDYoOWTYW2LFDHEww2cM4wjUAmMjUkhqueL3VuWNKTguNYGdJgE959wWp4nFGB0K7aIDNMbXTEMM9DgKKJIEBwCowL9l502IAAtKBvLG1oc1aB4eYLv0lg2AuCHjQbU1Dv0vLfJgPRFu8HScVo2g6MzD7Y67n26Ro1OhcOc0+CKk72AxgEAvZmMs9jHXh4TTT2JVnSYN8-1y4sghmKn+0CxnQtHil2eS4ggOjB0djW58iwNR4vK2K8wo2D0AeAZKaeDYLTb7q+75dqs9dGwgI5zjHPEBN7sGGGTk62CHzkeipInqfhs-u6BYxdIYPwLsDWjgeXmBQSKEMilHrfbwlLluUff4zKOgddNOUchCFNfJe5o9D6RMmXa2C4o6vyOmzfWxVDZDn0IuCcXR+jlyhptZivQIqLEdrMaYE4HQjwemPJ8J0nQu0QW7L+RgDALQwRxc0dNVoChVrBQGgMGrD0rohauiURaYDep-XSdM9AvH7oECYZgNBsNpvMIIgCLSwNZsLdmOhRFEwgm0IuQpAbfGCPIlWijgiThUaQquochaULxhzLR9xk7+Wgv4T4IpjEfFMYA3hDkyECIoUIyQKIURyigNgNEmFJAAFcpClR-A3eeA9MA8X-qYKO2Jo7DBHK3WmnCfhCm0BECIQA */
   createMachine(
     {
@@ -55,7 +56,7 @@ export const gazeMachine =
         events: {} as Event,
       },
 
-      // tsTypes: {} as import("./navigationMachine.typegen").Typegen0,
+      tsTypes: {} as import("./navigationMachine.typegen").Typegen0,
 
       predictableActionArguments: true,
       id: "gaze",
@@ -69,10 +70,8 @@ export const gazeMachine =
           on: {
             PASSENGER_DETECTED: "passenger_present",
           },
-          
-
         },
-      
+
         passenger_present: {
           initial: "idle",
           on: {
@@ -84,7 +83,7 @@ export const gazeMachine =
                 GAZE: "in_gaze",
               },
               after: {
-                4000: {
+                14000: {
                   target: "attract_gaze",
                   actions: "consoleEvent",
                 },
@@ -96,7 +95,7 @@ export const gazeMachine =
                 GAZE: "in_gaze",
               },
               after: {
-                3000: "hyper_attract_gaze",
+                13000: "hyper_attract_gaze",
               },
             },
             hyper_attract_gaze: {
@@ -104,7 +103,7 @@ export const gazeMachine =
                 GAZE: "in_gaze",
               },
               after: {
-                5000: "flip_channel",
+                15000: "flip_channel",
               },
             },
             flip_channel: {
@@ -151,8 +150,6 @@ export const gazeMachine =
             },
           },
         },
-       
-        
       },
     },
     {
@@ -165,7 +162,7 @@ export const gazeMachine =
   );
 
 export const gazeMachineContext = createContext<any>({});
-// export const gazeService = interpret(gazeMachine).start();
-// export const handlePassengerDetected = ()=>{
-//   gazeService.send("PASSENGER_DETECTED")
+// export const gazeStateService = interpret(gazeMachine).start()
+// export const handleGaze = ()=>{
+//   gazeStateService.send('PASSENGER_DETECTED')
 // }

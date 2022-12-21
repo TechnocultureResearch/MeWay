@@ -1,87 +1,57 @@
-// import React, { useContext } from "react";
-// import { View, Text, TouchableOpacity } from "react-native";
-// import AddButton from "./AddButton";
-// import RandomApp from "./RandomApp";
-// import DecreaseButton from "./DecreaseButton";
-// import WidgetShell from "./WidgetShell";
-// import { GlobalStateContext } from "./GlobalState";
-// import { useMachine, useSelector } from "@xstate/react";
-// import { State, StateFrom } from "xstate";
-// import { gazeMachine } from "../machines/navigationMachine";
-
-// const passengerDetector = (state: any) => {
-//   return state.matches("passenger_detected");
-// };
-// const attract_gaze = (state: any) => {
-//   return state.matches("attract_gaze");
-// };
-
-// const MinimalUi = (props: any) => {
-//   const globalServices = useContext(GlobalStateContext);
-
-//   const isPassengerIn = useSelector(
-//     globalServices.gazeService,
-//     passengerDetector
-//   );
-//   const AttractGaze = useSelector(globalServices.gazeService, attract_gaze);
-//   const { send } = globalServices.gazeService;
-
-//   return (
-//     <View className="flex gap-[15px]">
-//       <View
-//         className={`h-[70%]  bg-white
-//       ${AttractGaze ? "w-[64vw]" : ""}
-
-//       `}
-//       >
-//         {AttractGaze && <RandomApp />}
-//       </View>
-//       <View className="h-[180px] justify-center items-center flex flex-row gap-5  ">
-//         {isPassengerIn && <DecreaseButton />}
-
-//         <WidgetShell />
-//         <WidgetShell />
-//         {isPassengerIn && <RandomApp />}
-//         <AddButton />
-//         <TouchableOpacity onPress={() => send("PASSENGER_DETECTED")}>
-//           <Text className="text-4xl font-normal text-white cursor-pointer">
-//             add app
-//           </Text>
-//         </TouchableOpacity>
-//       </View>
-//     </View>
-//   );
-// };
-
-// export default MinimalUi;
-
-import React from "react";
-import { View } from "react-native";
+import React, { useContext, useEffect } from "react";
+import { View, Text } from "react-native";
 import AddButton from "./AddButton";
 import RandomApp from "./RandomApp";
 import DecreaseButton from "./DecreaseButton";
 import WidgetShell from "./WidgetShell";
 import { useMachine } from "@xstate/react";
 import { gazeMachine, gazeMachineContext } from "../machines/navigationMachine";
-
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withTiming,
+} from "react-native-reanimated";
 const MinimalUi = () => {
   const [state, send] = useMachine<any>(gazeMachine, {
     devTools: true,
   });
+  const opacitty = useSharedValue(0.5);
 
+  const MinimalUiStyle = useAnimatedStyle(() => {
+    return {
+      opacity: opacitty.value,
+    };
+  }, []);
+  useEffect(() => {
+    opacitty.value = withTiming(1, { duration: 500 });
+  });
+
+  // const { state, send } = useContext(gazeMachineContext);
   return (
-    <gazeMachineContext.Provider value={{ send, state }}>
+    <gazeMachineContext.Provider value={{ state, send }}>
       <View className="flex gap-[15px]">
-        <View>
+        <Animated.View style={[{}, MinimalUiStyle]}>
           <View
-            className={`h-[70%]  bg-white
-      ${state.matches("attract_gaze") ? "w-[64vw]" : ""}
-
-      `}
+            className={`h-[70vh]  flex justify-center items-center bg-white
+            ${state.matches("passenger_present.attract_gaze") && "w-[70vw]"}
+            ${state.matches("passenger_present.fail") && "bg-red-800"}
+            ${
+              state.matches("passenger_present.hyper_attract_gaze") &&
+              "bg-green-800"
+            }
+            ${state.matches("passenger_present.flip_channel") && "bg-blue-800"}
+            
+            `}
           >
-            {state.matches("attract_gaze") && <RandomApp />}
+            <Text
+              className={`text-3xl hidden
+            ${state.matches("passenger_present.attract_gaze") && "flex"}
+            `}
+            >
+              Welcome to meway
+            </Text>
           </View>
-        </View>
+        </Animated.View>
         <View className="h-[180px] justify-center items-center flex flex-row gap-5  ">
           {state.matches("passenger_present") ? <DecreaseButton /> : ""}
 
