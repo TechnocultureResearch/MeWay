@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@meway/tailwind-config": "*",
+    "@xstate/cli": "^0.4.1",
     "@xstate/react": "^3.0.1",
     "expo": "^47.0.0",
     "expo-dev-client": "~2.0.0",

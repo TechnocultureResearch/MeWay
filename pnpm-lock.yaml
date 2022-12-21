@@ -36,6 +36,7 @@ importers:
       '@types/react': ~18.0.25
       '@types/react-dom': ~18.0.9
       '@types/react-native': ~0.70.5
+      '@xstate/cli': ^0.4.1
       '@xstate/react': ^3.0.1
       autoprefixer: ^10.4.8
       babel-preset-expo: ~9.2.1
@@ -58,6 +59,7 @@ importers:
       xstate: ^4.34.0
     dependencies:
       '@meway/tailwind-config': link:../../packages/config/tailwind
+      '@xstate/cli': 0.4.1
       '@xstate/react': 3.0.1_45qrmwzxihfegmx77dyqkysac4
       expo: 47.0.7_@babel+core@7.20.2
       expo-dev-client: 2.0.1_expo@47.0.7
@@ -3058,6 +3060,35 @@ packages:
     resolution: {integrity: sha512-yceMpm/xd4W2a85iqZyO09gTnHvXF6pyiWjD2jcOJs7hRoZtNNOO1eJlhHj1ixA+xip2hOyGn+LgcvLCMo5zXA==}
     engines: {node: '>=10.0.0'}
 
+  /@xstate/cli/0.4.1:
+    resolution: {integrity: sha512-pArdkCOj5wBt2Ctn1nnWF7DAt9ms1XAFLdVndn2Pn3rShbgd8kxAYZ7MN9FWb1P8BH4AyVFrVgpTjPp8y7yLsg==}
+    hasBin: true
+    dependencies:
+      '@babel/core': 7.20.2
+      '@xstate/machine-extractor': 0.9.0_xstate@4.34.0
+      '@xstate/tools-shared': 2.0.1_xstate@4.34.0
+      chokidar: 3.5.3
+      commander: 8.3.0
+      xstate: 4.34.0
+    transitivePeerDependencies:
+      - prettier
+      - supports-color
+    dev: false
+
+  /@xstate/machine-extractor/0.9.0_xstate@4.34.0:
+    resolution: {integrity: sha512-QtjlBHdIp6OwwsSpbAwa4U2/WzijnW+EMu2Tgj20t94zMlQFtbOE2l5dnI4u/DWJBK+/S9zj39qIAmdlQFx8/w==}
+    peerDependencies:
+      xstate: ^4
+    dependencies:
+      '@babel/parser': 7.20.3
+      '@babel/traverse': 7.20.1
+      '@babel/types': 7.20.2
+      recast: 0.21.5
+      xstate: 4.34.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
   /@xstate/react/3.0.1_45qrmwzxihfegmx77dyqkysac4:
     resolution: {integrity: sha512-/tq/gg92P9ke8J+yDNDBv5/PAxBvXJf2cYyGDByzgtl5wKaxKxzDT82Gj3eWlCJXkrBg4J5/V47//gRJuVH2fA==}
     peerDependencies:
@@ -3076,6 +3107,18 @@ packages:
       xstate: 4.34.0
     transitivePeerDependencies:
       - '@types/react'
+    dev: false
+
+  /@xstate/tools-shared/2.0.1_xstate@4.34.0:
+    resolution: {integrity: sha512-AAl5d2TWcUf7U/hiJhafuennvfERA2pqlQ94Whiyyjd/QFkdFtmnxR9sX/ogWMK5oGv4exO7+3E6zt7LXRgnzQ==}
+    peerDependencies:
+      prettier: ^2.3.1
+      xstate: ^4
+    dependencies:
+      '@xstate/machine-extractor': 0.9.0_xstate@4.34.0
+      xstate: 4.34.0
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /@xtuc/ieee754/1.2.0:
@@ -3499,6 +3542,13 @@ packages:
 
   /ast-types/0.14.2:
     resolution: {integrity: sha512-O0yuUDnZeQDL+ncNGlJ78BiO4jnYI3bvMsD5prT0/nsgijG/LpNBIr63gTjVTNsiGkgQhiyCShTgxt8oXOrklA==}
+    engines: {node: '>=4'}
+    dependencies:
+      tslib: 2.4.1
+    dev: false
+
+  /ast-types/0.15.2:
+    resolution: {integrity: sha512-c27loCv9QkZinsa5ProX751khO9DJl/AcB5c2KNtA6NRvHKS0PgLfcftz72KVq504vB0Gku5s2kUZzDBvQWvHg==}
     engines: {node: '>=4'}
     dependencies:
       tslib: 2.4.1
@@ -4455,6 +4505,11 @@ packages:
   /commander/7.2.0:
     resolution: {integrity: sha512-QrWXB+ZQSVPmIWIhtEO9H+gwHaMGYiF5ChvoJ+K9ZGHG/sVsa6yiesAD1GC/x46sET00Xlwo1u49RVVVzvcSkw==}
     engines: {node: '>= 10'}
+
+  /commander/8.3.0:
+    resolution: {integrity: sha512-OkTL9umf+He2DZkUq8f8J9of7yL6RJKI24dVITBmNfZBmri9zYZQrKkuXiKhyfPSu8tUhnVBB1iKXevvnlR4Ww==}
+    engines: {node: '>= 12'}
+    dev: false
 
   /commander/9.4.1:
     resolution: {integrity: sha512-5EEkTNyHNGFPD2H+c/dXXfQZYa/scCKasxWcXJaWnNJ99pnQN9Vnmqow+p+PlFPE63Q6mThaZws1T+HxfpgtPw==}
@@ -11271,6 +11326,16 @@ packages:
     engines: {node: '>= 4'}
     dependencies:
       ast-types: 0.14.2
+      esprima: 4.0.1
+      source-map: 0.6.1
+      tslib: 2.4.1
+    dev: false
+
+  /recast/0.21.5:
+    resolution: {integrity: sha512-hjMmLaUXAm1hIuTqOdeYObMslq/q+Xff6QE3Y2P+uoHAg2nmVlLBps2hzh1UJDdMtDTMXOFewK6ky51JQIeECg==}
+    engines: {node: '>= 4'}
+    dependencies:
+      ast-types: 0.15.2
       esprima: 4.0.1
       source-map: 0.6.1
       tslib: 2.4.1
