@@ -7,31 +7,40 @@ import WidgetShell from "./WidgetShell";
 import { useMachine } from "@xstate/react";
 import { gazeMachine, gazeMachineContext } from "../machines/navigationMachine";
 import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withTiming,
+  // useSharedValue,
+  // useAnimatedStyle,
+  // withTiming,
+  SlideInDown,
+  // SlideInUp,
 } from "react-native-reanimated";
+import SwipeUp from "./SwipeUp";
 const MinimalUi = () => {
   const [state, send] = useMachine<any>(gazeMachine, {
     devTools: true,
   });
-  const opacitty = useSharedValue(0.5);
+  // const animation = useSharedValue({ width: 800 });
+  // const animationStyle = useAnimatedStyle(() => ({
+  //   width: withTiming(animation.value.width, {
+  //     duration: 1000,
+  //   }),
+  // }));
+  // const width = useSharedValue(1024);
+  // const animation = useAnimatedStyle(() => {
+  //   return {
+  //     width: width.value,
+  //   };
+  // }, []);
+  // useEffect(() => {
+  //   width.value = withTiming(500, { duration: 10000 });
+  // });
+  // console.log(state.value);
 
-  const MinimalUiStyle = useAnimatedStyle(() => {
-    return {
-      opacity: opacitty.value,
-    };
-  }, []);
-  useEffect(() => {
-    opacitty.value = withTiming(1, { duration: 500 });
-  });
-
-  // const { state, send } = useContext(gazeMachineContext);
   return (
     <gazeMachineContext.Provider value={{ state, send }}>
       <View className="flex gap-[15px]">
-        <Animated.View style={[{}, MinimalUiStyle]}>
-          <View
+        <Animated.View>
+          <Animated.View
+            // style={[{}, state.matches("passenger_present") && animation]}
             className={`h-[70vh]  flex justify-center items-center bg-white
             ${state.matches("passenger_present.attract_gaze") && "w-[70vw]"}
             ${state.matches("passenger_present.fail") && "bg-red-800"}
@@ -43,6 +52,7 @@ const MinimalUi = () => {
             
             `}
           >
+            <SwipeUp />
             <Text
               className={`text-3xl hidden
             ${state.matches("passenger_present.attract_gaze") && "flex"}
@@ -50,16 +60,19 @@ const MinimalUi = () => {
             >
               Welcome to meway
             </Text>
-          </View>
+          </Animated.View>
         </Animated.View>
-        <View className="h-[180px] justify-center items-center flex flex-row gap-5  ">
+        <Animated.View
+          entering={SlideInDown}
+          className="h-[180px] justify-center items-center flex flex-row gap-5  "
+        >
           {state.matches("passenger_present") ? <DecreaseButton /> : ""}
 
           <WidgetShell />
           <WidgetShell />
           {state.matches("passenger_present") ? <RandomApp /> : ""}
           <AddButton />
-        </View>
+        </Animated.View>
       </View>
     </gazeMachineContext.Provider>
   );

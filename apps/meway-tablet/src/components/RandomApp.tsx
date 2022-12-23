@@ -1,21 +1,16 @@
 import { useMachine } from "@xstate/react";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { View, Button } from "react-native";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withTiming,
-  FadeIn,
-  BounceInRight,
-  FlipInYRight,
-  StretchInY,
-  FadeOut,
   FlipOutYLeft,
 } from "react-native-reanimated";
-import { gazeMachine } from "../machines/navigationMachine";
+import { gazeMachine, gazeMachineContext } from "../machines/navigationMachine";
 
 const RandomApp = () => {
-  const [state, send] = useMachine<any>(gazeMachine, {});
+  const { send, state } = useContext(gazeMachineContext);
   const scale = useSharedValue(0.2);
 
   const randomAppStyle = useAnimatedStyle(() => {
@@ -28,13 +23,10 @@ const RandomApp = () => {
   });
   return (
     <Animated.View
-      className={`w-[180px] m-[15px] h-[180px] bg-white  flex  
-      ${state.matches("passenger_present") ? "hidden" : ""}
-
-    
+      className={`w-[180px] m-[15px] h-[180px] bg-white  flex      
   `}
       exiting={FlipOutYLeft}
-      style={[{}, randomAppStyle]}
+      style={[{}, state.matches("passenger_present") && randomAppStyle]}
     >
       <Button
         title="SHOW"

@@ -3,10 +3,8 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { gazeMachineContext } from "../machines/navigationMachine";
 
 const AddButton = () => {
-  const { send, state } = useContext(gazeMachineContext);
-  if (state.matches("passenger_present")) {
-    console.log(state.value);
-  }
+  const { send } = useContext(gazeMachineContext);
+
   return (
     <TouchableOpacity onPress={() => send("PASSENGER_DETECTED")}>
       <View className="h-[62px] w-[62px] cursor-pointer rounded-full flex justify-center items-center border-[1px] border-[white] bg-black">

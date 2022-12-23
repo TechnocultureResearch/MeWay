@@ -6,10 +6,10 @@
         internalEvents: {
           "xstate.after(1000)#gaze.passenger_present.in_gaze.cg3": { type: "xstate.after(1000)#gaze.passenger_present.in_gaze.cg3" };
 "xstate.after(13000)#gaze.passenger_present.attract_gaze": { type: "xstate.after(13000)#gaze.passenger_present.attract_gaze" };
-"xstate.after(14000)#gaze.passenger_present.idle": { type: "xstate.after(14000)#gaze.passenger_present.idle" };
 "xstate.after(15000)#gaze.passenger_present.flip_channel": { type: "xstate.after(15000)#gaze.passenger_present.flip_channel" };
 "xstate.after(15000)#gaze.passenger_present.hyper_attract_gaze": { type: "xstate.after(15000)#gaze.passenger_present.hyper_attract_gaze" };
 "xstate.after(3000)#gaze.passenger_present.in_gaze.idle": { type: "xstate.after(3000)#gaze.passenger_present.in_gaze.idle" };
+"xstate.after(5000)#gaze.passenger_present.idle": { type: "xstate.after(5000)#gaze.passenger_present.idle" };
 "xstate.after(5000)#gaze.passenger_present.in_gaze.cg1": { type: "xstate.after(5000)#gaze.passenger_present.in_gaze.cg1" };
 "xstate.after(8000)#gaze.passenger_present.in_gaze.cg2": { type: "xstate.after(8000)#gaze.passenger_present.in_gaze.cg2" };
 "xstate.init": { type: "xstate.init" };
@@ -24,8 +24,8 @@
           services: never;
         };
         eventsCausingActions: {
-          "consoleEvent": "xstate.after(14000)#gaze.passenger_present.idle";
-"refresh_playlist": "xstate.after(14000)#gaze.passenger_present.idle";
+          "consoleEvent": "xstate.after(5000)#gaze.passenger_present.idle";
+"refresh_playlist": "xstate.after(5000)#gaze.passenger_present.idle";
         };
         eventsCausingDelays: {
           

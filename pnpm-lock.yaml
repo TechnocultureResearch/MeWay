@@ -50,7 +50,7 @@ importers:
       react: 18.1.0
       react-dom: 18.1.0
       react-native: 0.70.5
-      react-native-reanimated: ^2.13.0
+      react-native-reanimated: ~2.12.0
       react-native-safe-area-context: ^4.4.1
       react-native-web: ~0.18.7
       tailwindcss: ~3.2.1
@@ -69,7 +69,7 @@ importers:
       react: 18.1.0
       react-dom: 18.1.0_react@18.1.0
       react-native: 0.70.5_54md7p3jw3ru3lahxqgw5vptci
-      react-native-reanimated: 2.13.0_6puqyg2n45u266kros6m47lk7e
+      react-native-reanimated: 2.12.0_6puqyg2n45u266kros6m47lk7e
       react-native-safe-area-context: 4.4.1_tj3nonr5gneraukzjkxpsiy7yu
       react-native-web: 0.18.10_ef5jwxihqo6n7gxfmzogljlgcm
       xstate: 4.34.0
@@ -11125,8 +11125,8 @@ packages:
     resolution: {integrity: sha512-oOanj84fJEXUg9FoEAQomA8ISG+DVIrTZ3qF7m69VQUJyOGYyDZmPqKcjvRku4KXlEH6hWO9i4ACLzNBh8gC0A==}
     dev: false
 
-  /react-native-reanimated/2.13.0_6puqyg2n45u266kros6m47lk7e:
-    resolution: {integrity: sha512-yUHyYVIegWWIza4+nVyS3CSmI/Mc8kLFVHw2c6gnSHaYhYA4LeEjH/jBkoMzHk9Xd0Ra3cwtjYKAMG8OTp6JVg==}
+  /react-native-reanimated/2.12.0_6puqyg2n45u266kros6m47lk7e:
+    resolution: {integrity: sha512-nrlPyw+Hx9u4iJhZk9PoTvDo/QmVAd+bo7OK9Tv3hveNEF9++5oig/g3Uv9V93shy9avTYGsUprUvAEt/xdzeQ==}
     peerDependencies:
       '@babel/core': ^7.0.0-0
       react: '*'
