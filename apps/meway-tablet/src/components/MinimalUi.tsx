@@ -24,14 +24,18 @@ const MinimalUi = () => {
   const width = useSharedValue(1300);
   const minimalUiStyle = useAnimatedStyle(() => {
     return {
-      width: width.value,
+      width: withSpring(width.value, {
+        damping: 40,
+        mass: 22,
+        stiffness: 300,
+      }),
     };
-  });
+  }, []);
   useEffect(() => {
     if (state.matches("passenger_present")) {
-      width.value = withTiming(950, { duration: 700 });
+      width.value = withTiming(950, { duration: 500 });
     } else {
-      width.value = withTiming(1300, { duration: 700 });
+      width.value = withTiming(1300, { duration: 500 });
     }
   });
   const springAnimationStyle = useAnimatedStyle(() => {

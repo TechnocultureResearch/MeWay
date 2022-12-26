@@ -83,7 +83,7 @@ export const gazeMachine =
                 GAZE: "in_gaze",
               },
               after: {
-                5000: {
+                10000: {
                   target: "attract_gaze",
                   actions: "consoleEvent",
                 },
