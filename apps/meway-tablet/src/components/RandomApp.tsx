@@ -19,7 +19,7 @@ const RandomApp = () => {
     };
   }, []);
   useEffect(() => {
-    scale.value = withTiming(1, { duration: 500 });
+    scale.value = withTiming(1, { duration: 700 });
   });
   return (
     <Animated.View

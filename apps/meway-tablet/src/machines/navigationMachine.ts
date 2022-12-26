@@ -56,7 +56,7 @@ export const gazeMachine =
         events: {} as Event,
       },
 
-      tsTypes: {} as import("./navigationMachine.typegen").Typegen0,
+      // tsTypes: {} as import("./navigationMachine.typegen").Typegen0,
 
       predictableActionArguments: true,
       id: "gaze",
