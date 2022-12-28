@@ -23,7 +23,6 @@ on:
 
 jobs:
   if_merged:
-    mobile:
     runs-on: ubuntu-latest
     steps:
       - name: 🏗 Setup repository
