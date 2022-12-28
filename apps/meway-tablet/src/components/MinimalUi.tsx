@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from "react";
-import { View, Text, TouchableWithoutFeedback } from "react-native";
+import React, { useEffect } from "react";
+import { View, Text } from "react-native";
 import AddButton from "./AddButton";
 import RandomApp from "./RandomApp";
 import DecreaseButton from "./DecreaseButton";
@@ -7,16 +7,10 @@ import WidgetShell from "./WidgetShell";
 import { useMachine } from "@xstate/react";
 import { gazeMachine, gazeMachineContext } from "../machines/navigationMachine";
 import Animated, {
-  // useSharedValue,
   useAnimatedStyle,
-  // withTiming,
   withSpring,
   SlideInDown,
   useSharedValue,
-  withRepeat,
-  withSequence,
-  withTiming,
-  // SlideInUp,
 } from "react-native-reanimated";
 import SwipeUp from "./SwipeUp";
 const MinimalUi = () => {
@@ -61,7 +55,6 @@ const MinimalUi = () => {
             `}
           >
             <SwipeUp />
-
             <Text
               className={`text-3xl hidden
             ${state.matches("passenger_present.attract_gaze") && "flex"}
