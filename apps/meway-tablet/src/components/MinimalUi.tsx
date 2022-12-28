@@ -20,44 +20,32 @@ import Animated, {
 } from "react-native-reanimated";
 import SwipeUp from "./SwipeUp";
 const MinimalUi = () => {
-  const springAnimation = useSharedValue(0);
   const width = useSharedValue(1300);
   const minimalUiStyle = useAnimatedStyle(() => {
     return {
       width: withSpring(width.value, {
-        damping: 40,
-        mass: 22,
-        stiffness: 300,
+        damping: 10,
+        mass: 3,
+        stiffness: 117,
+        velocity: 50,
       }),
     };
   }, []);
   useEffect(() => {
     if (state.matches("passenger_present")) {
-      width.value = withTiming(950, { duration: 500 });
+      width.value = 950;
     } else {
-      width.value = withTiming(1300, { duration: 500 });
+      width.value = 1300;
     }
   });
-  const springAnimationStyle = useAnimatedStyle(() => {
-    return {
-      width: springAnimation.value,
-    };
-  });
-  const startSpringAnimation = () => {
-    "worklet";
-    springAnimation.value = withSpring(250, {
-      damping: 15,
-      mass: 12,
-      stiffness: 200,
-    });
-  };
+
   const [state, send] = useMachine<any>(gazeMachine, {
     devTools: true,
   });
 
   return (
     <gazeMachineContext.Provider value={{ state, send }}>
-      <View className="flex gap-[15px]">
+      <View className="flex gap-[15px] ">
         <Animated.View>
           <Animated.View
             style={[{}, minimalUiStyle]}
@@ -73,11 +61,7 @@ const MinimalUi = () => {
             `}
           >
             <SwipeUp />
-            <Animated.View style={[{}, springAnimationStyle]}>
-              <TouchableWithoutFeedback onPress={startSpringAnimation}>
-                <View className="w-10 h-10 bg-purple-600"></View>
-              </TouchableWithoutFeedback>
-            </Animated.View>
+
             <Text
               className={`text-3xl hidden
             ${state.matches("passenger_present.attract_gaze") && "flex"}
