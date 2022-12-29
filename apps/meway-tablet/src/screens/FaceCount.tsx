@@ -31,7 +31,7 @@ export const FaceCount = () => {
 
   return (
     <>
-      <Text className="font-bold text-orange-600/100">{faceData}</Text>
+      <Text className="text-orange-600/100 font-bold">{faceData}</Text>
       <Camera
         type={CameraType.front}
         style={{ opacity: 0, flex: 1 }}

@@ -1,0 +1,41 @@
+name: on merging into the dev
+
+on:
+  pull_request:
+    types:
+      - closed
+    inputs:
+      platform:
+        description: Platform to build for android
+        type: choice
+        required: true
+        default: all
+        options:
+          - android
+      profile:
+        description: EAS build profile (development/production)
+        type: choice
+        required: true
+        default: development
+        options:
+          - development
+          - production
+
+jobs:
+  if_merged:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🏗 Setup repository
+        uses: actions/checkout@v3
+
+      - name: 🏗 Setup monorepo
+        uses: ./.github/actions/setup-monorepo
+        with:
+          expo-token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: 👷 Build packages for mobile
+        run: pnpm run -w build:mobile
+
+      - name: 🚀 Build mobile
+        working-directory: apps/meway-tablet
+        run: eas build --non-interactive --wait --platform=${{ github.event.inputs.platform }} --profile=${{ github.event.inputs.profile }}

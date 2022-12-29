@@ -1,31 +1,38 @@
 {
-    "name": "meway",
-    "version": "0.0.1",
-    "private": true,
-    "workspaces": [
-      "apps/*",
-      "packages/*"
-    ],
-    "scripts": {
-      "build": "turbo run build",
-      "dev": "turbo run dev --parallel",
-      "lint": "turbo run lint",
-      "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-      "installhooks": "husky install",
-      "test": "echo 'no tests added yet'"
-    },
-    "devDependencies": {
-      "@commitlint/cli": "^17.3.0",
+  "private": true,
+  "name": "meway",
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "installhooks": "husky install",
+    "test": "echo 'no tests added yet'",
+    "build:mobile": "turbo build --filter=\"...{./apps/mobile}\"",
+    "build:web": "turbo build --filter=\"...{./apps/Wifi-Login}\""
+  },
+  "devDependencies": {
+    "turbo": "^1.5.4",
+    "typescript": "^4.8.3",
+     "@commitlint/cli": "17.3.0",
       "@commitlint/config-conventional": "^17.3.0",
       "autoprefixer": "^10.4.8",
-      "@meway/eslint-config-custom": "*",
+      "eslint-config-custom": "*",
       "husky": "^8.0.1",
       "lint-staged": "^13.0.3",
       "postcss": "^8.4.16",
       "prettier": "^2.7.1",
-      "tailwindcss": "^3.1.8",
-      "turbo": "^1.4.3"
-    },
+      "tailwindcss": "^3.1.8"
+  },
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": [
+        "@babel/*",
+        "expo-modules-*",
+        "typescript"
+      ]
+    }
+  },
     "engines": {
       "npm": ">=7.0.0",
       "node": ">=14.0.0"
@@ -42,4 +49,4 @@
         "pre-commit": "lint-staged"
       }
     }
-  }
+}
