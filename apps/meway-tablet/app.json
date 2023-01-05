@@ -1,6 +1,6 @@
 {
   "expo": {
-    "owner":"technoculture",
+    "owner": "technoculture",
     "name": "meway-tablet",
     "slug": "meway",
     "version": "1.0.0",
@@ -31,6 +31,9 @@
       "eas": {
         "projectId": "4e25e43f-a276-43c2-aa24-feafb645c1fc"
       }
+    },
+    "ios": {
+      "bundleIdentifier": "com.technoculture.meway"
     }
   }
 }
